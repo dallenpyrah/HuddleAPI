@@ -11,3 +11,5 @@ class UserContract {
         this.fullName = fullName;
     }
 }
+
+export default UserContract;

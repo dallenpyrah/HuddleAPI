@@ -1,3 +1,4 @@
+import UserContract from "../contracts/userContract";
 import { UserCredential } from "firebase/auth";
 import { authenticationProvider } from "../providers/authenticationProvider";
 

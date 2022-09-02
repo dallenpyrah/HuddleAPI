@@ -1,4 +1,5 @@
 import bodyParser from 'body-parser';
+import UserContract from '../contracts/userContract';
 import express from 'express'
 import * as authenticationService from '../services/authenticationService';
 
