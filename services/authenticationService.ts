@@ -1,10 +1,8 @@
-import express from 'express'
+import { UserCredential } from "firebase/auth";
+import { authenticationProvider } from "../providers/authenticationProvider";
 
-const router = express.Router()
-
-router.post("/auth/adduser", async (req: any, res: any) => {
-        try {
-            const user = req.body;
+class AuthenticationService {
+    async addUser(user: UserContract): Promise<UserCredential> {
             user.fullName = user.fullName.toLowerCase();
             user.email = user.email.toLowerCase();
 
@@ -16,14 +14,8 @@ router.post("/auth/adduser", async (req: any, res: any) => {
                 throw new Error("Passwords do not match");
             }
 
-        } catch (error) {
-            res.sendStatus(500);
-        }
+            return await authenticationProvider.addUser(user);
     }
-);
+}
 
-router.get("/auth/getuser", async (req: any, res: any) => {
-        res.send("Hello World");
-})
-
-export default router;
+export const authenticationService = new AuthenticationService();
