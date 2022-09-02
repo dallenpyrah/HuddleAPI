@@ -43,6 +43,7 @@
     "function-bind": "^1.1.1",
     "get-intrinsic": "^1.1.2",
     "glob": "^7.2.3",
+    "grunt": "^1.5.3",
     "has": "^1.0.3",
     "has-flag": "^3.0.0",
     "has-symbols": "^1.0.3",
