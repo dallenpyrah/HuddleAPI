@@ -5,10 +5,11 @@ const app = express();
 
 app.use("/api/v1", AuthenticationRouter)
 
-app.get('/', (req, res) => {
-    res.send('Hello World!');
+app.get('/', (req, res) => {  
+    res.send('Hello World!');   
 })
 
 app.listen(8001, () => {
+    // eslint-disable-next-line no-undef
     console.log('Server started again on port 8001 - http://localhost:8001');
 });
