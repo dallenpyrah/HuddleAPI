@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "type": "commonjs",
   "dependencies": {
+    "@prisma/client": "^4.3.1",
     "accepts": "^1.3.8",
     "ansi-styles": "^3.2.1",
     "argparse": "^1.0.10",
@@ -65,6 +66,7 @@
     "minimist": "^1.2.6",
     "mkdirp": "^0.5.6",
     "ms": "^2.0.0",
+    "mysql": "^2.18.1",
     "negotiator": "^0.6.3",
     "object-inspect": "^1.12.2",
     "on-finished": "^2.4.1",
@@ -100,6 +102,7 @@
     "wrappy": "^1.0.2"
   },
   "scripts": {
+    "prebuild": "eslint . --ext .ts",
     "build": "tsc",
     "prestart": "npm run build",
     "start": "node ."
@@ -110,6 +113,7 @@
   "description": "",
   "devDependencies": {
     "@types/express": "^4.17.13",
+    "@types/mysql": "^2.15.21",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
     "eslint": "^8.23.0",
@@ -118,6 +122,7 @@
     "eslint-plugin-jsx-a11y": "^6.6.1",
     "eslint-plugin-react": "^7.31.4",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "prisma": "^4.3.1",
     "webpack-cli": "^4.10.0"
   }
 }

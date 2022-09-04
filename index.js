@@ -1,5 +1,5 @@
 import express from 'express'
-import AuthenticationController from './routers/authentication/AuthenticationController'
+import AuthenticationController from './controllers/authentication/AuthenticationController'
 
 const app = express();
 

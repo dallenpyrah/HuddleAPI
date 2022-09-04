@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import UserContract from '../../contracts/user/UserContract';
 import express from 'express'
+import { Request, Response } from 'express';
 import { authenticationService } from '../../services/authentication/AuthenticationService';
 import AuthenticationResponseContract from '../../contracts/authentication/AuthenticationResponseContract';
 
@@ -14,7 +15,7 @@ class AuthenticationController {
         this.router.post(`${apiRoute}/login`, this.jsonParser, this.login);
     }
     
-    async signup(req: any, res: any){
+    async signup(req: Request, res: Response){
         let isSignUpSuccessful = false;
         let statusCode = 0;
         let message = "";
@@ -38,7 +39,7 @@ class AuthenticationController {
         }
     }
 
-    async login(req: any, res: any){
+    async login(req: Request, res: Response){
         let isLoginSuccessful = false;
         let statusCode = 0;
         let message = "";
