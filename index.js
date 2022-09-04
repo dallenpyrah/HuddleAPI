@@ -1,9 +1,9 @@
 import express from 'express'
-import AuthenticationController from './routers/authentication/AuthenticationRouter'
+import AuthenticationRouter from './routers/authentication/AuthenticationRouter'
 
 const app = express();
 
-app.use("/api/v1", AuthenticationController)
+app.use("/api/v1", AuthenticationRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello World!');

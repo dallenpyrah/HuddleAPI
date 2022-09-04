@@ -1,14 +1,9 @@
 import UserContract from "../../contracts/user/UserContract";
 import { UserCredential } from "firebase/auth";
 import IAuthentication from "../../interfaces/authentication/IAuthentication";
+import { authenticationRepository } from "../../repositories/authentication/AuthenticationRepository";
 
-export default class AuthenticationService implements IAuthentication {
-    private authenticationRepository: IAuthentication;
-
-    constructor(authenticationRepository: IAuthentication) {
-        this.authenticationRepository = authenticationRepository;
-    }
-
+class AuthenticationService implements IAuthentication {
     async signup(user: UserContract): Promise<UserCredential> {
             user.fullName = user.fullName.toLowerCase();
             user.email = user.email.toLowerCase();
@@ -21,7 +16,7 @@ export default class AuthenticationService implements IAuthentication {
                 throw new Error("Passwords do not match");
             }
 
-            return await this.authenticationRepository.signup(user);
+            return await authenticationRepository.signup(user);
     }
 
     async login(user: UserContract) : Promise<UserCredential> {
@@ -29,6 +24,8 @@ export default class AuthenticationService implements IAuthentication {
             throw new Error("All fields are required");
         }
 
-        return await this.authenticationRepository.login(user);
+        return await authenticationRepository.login(user);
     }
 }
+
+export const authenticationService = new AuthenticationService();

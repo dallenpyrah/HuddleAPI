@@ -3,7 +3,7 @@ import { getAuth, createUserWithEmailAndPassword, UserCredential, signInWithEmai
 import { auth } from "../../firebase-config";
 import IAuthentication from "../../interfaces/authentication/IAuthentication";
 
-export default class AuthenticationRepository implements IAuthentication {
+class AuthenticationRepository  {
     async signup(user: UserContract) : Promise<UserCredential> {
         const newUser = await createUserWithEmailAndPassword(auth, user.email, user.password);
         return newUser;
@@ -14,3 +14,5 @@ export default class AuthenticationRepository implements IAuthentication {
         return loggedInUser;
     }
 }
+
+export const authenticationRepository = new AuthenticationRepository();
