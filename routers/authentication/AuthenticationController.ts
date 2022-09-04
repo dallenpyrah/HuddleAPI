@@ -4,14 +4,14 @@ import express from 'express'
 import { authenticationService } from '../../services/authentication/AuthenticationService';
 import AuthenticationResponseContract from '../../contracts/authentication/AuthenticationResponseContract';
 
-const router = express.Router();
-const jsonParser = bodyParser.json();
+class AuthenticationController {
+    public router = express.Router();
+    private jsonParser = bodyParser.json();
 
-class AuthenticationRouter {
     constructor(){
         const apiRoute = "/auth";
-        router.post(`${apiRoute}/signup`, jsonParser, this.signup);
-        router.get(`${apiRoute}/login`, jsonParser, this.login);
+        this.router.post(`${apiRoute}/signup`, this.jsonParser, this.signup);
+        this.router.post(`${apiRoute}/login`, this.jsonParser, this.login);
     }
     
     async signup(req: any, res: any){
@@ -63,4 +63,4 @@ class AuthenticationRouter {
     }
 }
 
-export default AuthenticationRouter;
+export default AuthenticationController;
