@@ -30,7 +30,6 @@ class AuthenticationRouter {
 
             res.send(authenticationResponse);
         } catch (error) {
-            isSignUpSuccessful = false;
             statusCode = 500;
             message = error.message;
             authenticationResponse = new AuthenticationResponseContract(null, isSignUpSuccessful, statusCode, message);
@@ -40,8 +39,27 @@ class AuthenticationRouter {
     }
 
     async login(req: any, res: any){
-        const user = new UserContract(req.body.email, req.body.password)
-        const loggedInUser = await authenticationService.login(user);
+        let isLoginSuccessful = false;
+        let statusCode = 0;
+        let message = "";
+        let authenticationResponse = null;
+
+        try {
+            const user = new UserContract(req.body.email, req.body.password)
+            const userCredentials = await authenticationService.login(user);
+            isLoginSuccessful = userCredentials !== null ? true : false;
+            statusCode = 200;
+            message = isLoginSuccessful ? "User logged in successfully" : "User login failed";
+            authenticationResponse = new AuthenticationResponseContract(userCredentials, isLoginSuccessful, statusCode, message);
+
+            res.send(authenticationResponse);
+        } catch (error) {
+            statusCode = 500;
+            message = error.message;
+            authenticationResponse = new AuthenticationResponseContract(null, isLoginSuccessful, statusCode, message);
+
+            res.send(authenticationResponse)
+        }
     }
 }
 
