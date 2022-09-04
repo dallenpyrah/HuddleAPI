@@ -1,9 +1,9 @@
-import UserContract from "../../contracts/user/userContract";
+import UserContract from "../../contracts/user/UserContract";
 import { User, UserCredential } from "firebase/auth";
 
-interface IAuthenticationRepository {
+interface IAuthentication {
     login: (user: UserContract) => Promise<UserCredential>;
     signup: (user: UserContract) => Promise<UserCredential>;
 }
 
-export default IAuthenticationRepository;
+export default IAuthentication;

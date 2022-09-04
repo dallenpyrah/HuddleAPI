@@ -1,8 +1,9 @@
-import UserContract from "../../contracts/user/userContract";
+import UserContract from "../../contracts/user/UserContract";
 import { getAuth, createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase-config";
+import IAuthentication from "../../interfaces/authentication/IAuthentication";
 
-class AuthenticationProvider {
+export default class AuthenticationRepository implements IAuthentication {
     async signup(user: UserContract) : Promise<UserCredential> {
         const newUser = await createUserWithEmailAndPassword(auth, user.email, user.password);
         return newUser;
@@ -13,5 +14,3 @@ class AuthenticationProvider {
         return loggedInUser;
     }
 }
-
-export const authenticationProvider = new AuthenticationProvider();

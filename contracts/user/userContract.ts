@@ -1,4 +1,4 @@
-class UserContract {
+export default class UserContract {
     email: string;
     password: string;
     confirmPassword: string;
@@ -11,5 +11,3 @@ class UserContract {
         this.fullName = fullName;
     }
 }
-
-export default UserContract;
