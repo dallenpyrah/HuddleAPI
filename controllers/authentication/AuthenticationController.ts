@@ -32,7 +32,7 @@ class AuthenticationController {
             res.send(authenticationResponse);
         } catch (error) {
             statusCode = 500;
-            message = error.message;
+            message = authenticationService.getErrorMessageFromErrorCode(error);
             authenticationResponse = new AuthenticationResponseContract(null, isSignUpSuccessful, statusCode, message);
 
             res.send(authenticationResponse)
@@ -56,7 +56,7 @@ class AuthenticationController {
             res.send(authenticationResponse);
         } catch (error) {
             statusCode = 500;
-            message = error.message;
+            message = authenticationService.getErrorMessageFromErrorCode(error);
             authenticationResponse = new AuthenticationResponseContract(null, isLoginSuccessful, statusCode, message);
 
             res.send(authenticationResponse)

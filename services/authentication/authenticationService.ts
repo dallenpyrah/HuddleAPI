@@ -26,6 +26,23 @@ class AuthenticationService implements IAuthentication {
 
         return await authenticationRepository.login(user);
     }
+
+    getErrorMessageFromErrorCode(error: any) : string {
+        switch(error?.code) {
+            case "auth/user-not-found":
+                return "User not found";
+            case "auth/wrong-password":
+                return "Wrong password";
+            case "auth/email-already-in-use":
+                return "Email already in use";
+            case "auth/invalid-email":
+                return "Invalid email";
+            case "auth/weak-password":
+                return "Password is too weak";
+            default:
+                return error?.message;
+        }
+    }
 }
 
 export const authenticationService = new AuthenticationService();
