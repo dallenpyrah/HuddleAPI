@@ -26,16 +26,13 @@ model Issue {
   id        Int      @id @default(autoincrement())
   title     String
   description      String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  notifications  IssueNotification[]
-  comments Comment[]
-  language   Language @relation(fields: [languageId], references: [id])
-  languageId Int  @unique 
-  framework   Framework @relation(fields: [frameworkId], references: [id])
-  frameworkId Int  @unique 
+  status   String
   user      User     @relation(fields: [userId], references: [id])
   userId    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  language String
+  framework String
 }
 
 model Message {
@@ -56,32 +53,9 @@ model UserNotification {
   userId    Int
 }
 
-model IssueNotification {
-  id        Int      @id @default(autoincrement())
-  message   String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  issue     Issue     @relation(fields: [issueId], references: [id])
-  issueId   Int
-}
-
 model Comment {
   id        Int      @id @default(autoincrement())
   message   String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  issue     Issue     @relation(fields: [issueId], references: [id])
-  issueId   Int
-}
-
-model Language{
-  id        Int      @id @default(autoincrement())
-  name      String
-  issues   Issue[]
-}
-
-model Framework{
-  id        Int      @id @default(autoincrement())
-  name      String
-  issues   Issue[]
 }

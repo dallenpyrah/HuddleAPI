@@ -1,3 +1,4 @@
+import IssuesController from './controllers/issues/IssuesController';
 import express from 'express'
 import AuthenticationController from './controllers/authentication/AuthenticationController'
 
@@ -12,6 +13,7 @@ app.use(function(req, res, next) {
 });
 
 app.use("/api/v1", new AuthenticationController().router)
+app.use("/api/v1", new IssuesController().router)
 
 app.get('/', (req, res) => {  
     res.send('Hello World!');   

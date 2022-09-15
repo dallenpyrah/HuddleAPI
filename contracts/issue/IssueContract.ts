@@ -2,14 +2,16 @@ export default class IssueContract {
     title: string;
     description: string;
     status: string;
-    createdByUser: string;
-    createdByUserId: Int16Array;
+    userId: number;
+    language: string;
+    framework: string;
 
-    constructor(title: string, description: string, status: string, createdByUser: string, createdByUserId: Int16Array) {
+    constructor(title: string, description: string, status: string, userId: number, language: string, framework: string) {
         this.title = title;
         this.description = description;
         this.status = status;
-        this.createdByUser = createdByUser;
-        this.createdByUserId = createdByUserId;
+        this.userId = userId;
+        this.language = language;
+        this.framework = framework;
     }
 }

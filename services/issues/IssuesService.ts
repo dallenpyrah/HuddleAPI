@@ -1,17 +1,21 @@
+import { Issue } from "@prisma/client";
 import IssueContract from "../../contracts/issue/IssueContract";
 import { issuesRepository } from "../../repositories/issues/IssuesRepository";
 
 class IssuesService {
-    async createIssue(issueToCreate: IssueContract) { 
+    async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 
         const isIssueValid = this.validateIssueFields(issueToCreate);
+        let issue = {} as Issue;
 
         if (isIssueValid) { 
-            issuesRepository.createIssue(issueToCreate);
+            issue = await issuesRepository.createIssue(issueToCreate);
         }
+
+        return issue;
     }
 
     validateIssueFields(issueToValidate: IssueContract) : boolean { 
-        if (issueToValidate.createdByUser.length < 1) {
+        if (issueToValidate.userId > 0) {
             throw new Error("User is required");
         }
 
