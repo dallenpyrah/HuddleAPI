@@ -1,5 +1,5 @@
 import { Issue, PrismaClient } from "@prisma/client";
-import IssueContract from "../../contracts/issue/IssueContract";
+import IssueContract from "../contracts/IssueContract";
 
 class IssuesRepository {
     async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 

@@ -1,9 +1,9 @@
 import bodyParser from 'body-parser';
-import UserContract from '../../contracts/user/UserContract';
+import UserContract from '../contracts/UserContract';
 import express from 'express'
 import { Request, Response } from 'express';
-import { authenticationService } from '../../services/authentication/AuthenticationService';
-import AuthenticationResponseContract from '../../contracts/authentication/AuthenticationResponseContract';
+import { authenticationService } from '../services/AuthenticationService';
+import AuthenticationResponseContract from '../contracts/AuthenticationResponseContract';
 
 class AuthenticationController {
     public router = express.Router();

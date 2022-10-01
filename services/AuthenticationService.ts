@@ -1,7 +1,7 @@
-import UserContract from "../../contracts/user/UserContract";
+import UserContract from "../contracts/UserContract";
 import { UserCredential } from "firebase/auth";
-import IAuthentication from "../../interfaces/authentication/IAuthentication";
-import { authenticationRepository } from "../../repositories/authentication/AuthenticationRepository";
+import IAuthentication from "../interfaces/IAuthentication";
+import { authenticationRepository } from "../repositories/AuthenticationRepository";
 
 class AuthenticationService implements IAuthentication {
     async signup(user: UserContract): Promise<UserCredential> {

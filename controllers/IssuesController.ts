@@ -1,6 +1,6 @@
-import IssueContract from "../../contracts/issue/IssueContract";
+import IssueContract from "../contracts/IssueContract";
 import express, { Request, Response } from 'express';
-import { issuesService } from "../../services/issues/IssuesService";
+import { issuesService } from "../services/IssuesService";
 import bodyParser from "body-parser";
 
 

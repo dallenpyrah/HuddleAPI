@@ -1,6 +1,6 @@
-import UserContract from "../../contracts/user/UserContract";
+import UserContract from "../contracts/UserContract";
 import { createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword, getIdToken } from "firebase/auth";
-import { auth } from "../../firebase-config";
+import { auth } from "../firebase-config";
 import { PrismaClient } from "@prisma/client";
 
 class AuthenticationRepository  {

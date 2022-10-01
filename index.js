@@ -1,6 +1,6 @@
-import IssuesController from './controllers/issues/IssuesController';
+import IssuesController from './controllers/IssuesController';
 import express from 'express'
-import AuthenticationController from './controllers/authentication/AuthenticationController'
+import AuthenticationController from './controllers/AuthenticationController'
 
 const app = express();
 

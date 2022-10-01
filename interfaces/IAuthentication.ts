@@ -1,4 +1,4 @@
-import UserContract from "../../contracts/user/UserContract";
+import UserContract from "../contracts/UserContract";
 import { UserCredential } from "firebase/auth";
 
 interface IAuthentication {
