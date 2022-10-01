@@ -1,35 +1,34 @@
 import UserContract from "../contracts/UserContract";
-import { createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword, getIdToken } from "firebase/auth";
+import { createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase-config";
 import { PrismaClient } from "@prisma/client";
 
-class AuthenticationRepository  {
+export default class AuthenticationRepository  {
+    private prisma: PrismaClient;
+
+    constructor(prisma: PrismaClient) {
+        this.prisma = prisma;
+    }
 
     async signup(user: UserContract) : Promise<UserCredential> {
-        const prisma = new PrismaClient();
-
         try {
             const newUser = await createUserWithEmailAndPassword(auth, user.email, user.password);
             return newUser;
         } catch(error){
             throw new Error(error);
         } finally {
-            await prisma.$disconnect();
+            await this.prisma.$disconnect();
         }
     }
 
     async login(user: UserContract) : Promise<UserCredential> {
-        const prisma = new PrismaClient();
-
         try {
             const loggedInUser = await signInWithEmailAndPassword(auth, user.email, user.password);
             return loggedInUser;
         } catch (error) {
             throw new Error(error);
         } finally {
-            await prisma.$disconnect();
+            await this.prisma.$disconnect();
         }
     }
 }
-
-export const authenticationRepository = new AuthenticationRepository();

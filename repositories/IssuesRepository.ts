@@ -1,11 +1,16 @@
 import { Issue, PrismaClient } from "@prisma/client";
 import IssueContract from "../contracts/IssueContract";
 
-class IssuesRepository {
+export default class IssuesRepository {
+    private prisma: PrismaClient;
+
+    constructor(prisma: PrismaClient) {
+        this.prisma = prisma;
+    }
+
     async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 
-        const prisma = new PrismaClient();
         try {
-            const createdIssue = await prisma.issue.create({
+            const createdIssue = await this.prisma.issue.create({
                 data: {
                     title: issueToCreate.title,
                     description: issueToCreate.description,
@@ -19,10 +24,8 @@ class IssuesRepository {
         } catch (error) {
             throw new Error(error);
         } finally {
-            await prisma.$disconnect();
+            await this.prisma.$disconnect();
         }
     }
 }
-
-export const issuesRepository = new IssuesRepository();
 

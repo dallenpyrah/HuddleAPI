@@ -2,17 +2,18 @@ import bodyParser from 'body-parser';
 import UserContract from '../contracts/UserContract';
 import express from 'express'
 import { Request, Response } from 'express';
-import { authenticationService } from '../services/AuthenticationService';
+import AuthenticationService from '../services/AuthenticationService';
 import AuthenticationResponseContract from '../contracts/AuthenticationResponseContract';
 
 class AuthenticationController {
     public router = express.Router();
     private jsonParser = bodyParser.json();
+    private authenticationService: AuthenticationService;
 
-    constructor(){
-        const apiRoute = "/auth";
+    constructor(apiRoute: string, authenticationService: AuthenticationService){
         this.router.post(`${apiRoute}/signup`, this.jsonParser, this.signup);
         this.router.post(`${apiRoute}/login`, this.jsonParser, this.login);
+        this.authenticationService = authenticationService
     }
     
     async signup(req: Request, res: Response){
@@ -23,7 +24,7 @@ class AuthenticationController {
 
         try {
             const user = new UserContract(req.body.email, req.body.password, req.body.confirmPassword, req.body.fullName);
-            const userCredentials = await authenticationService.signup(user);
+            const userCredentials = await this.authenticationService.signup(user);
             isSignUpSuccessful = userCredentials !== null ? true : false;
             statusCode = 200;
             message = isSignUpSuccessful ? "User created successfully" : "User creation failed";
@@ -32,7 +33,7 @@ class AuthenticationController {
             res.send(authenticationResponse);
         } catch (error) {
             statusCode = 500;
-            message = authenticationService.getErrorMessageFromErrorCode(error);
+            message = this.authenticationService.getErrorMessageFromErrorCode(error);
             authenticationResponse = new AuthenticationResponseContract(null, isSignUpSuccessful, statusCode, message);
 
             res.send(authenticationResponse)
@@ -47,7 +48,7 @@ class AuthenticationController {
 
         try {
             const user = new UserContract(req.body.email, req.body.password)
-            const userCredentials = await authenticationService.login(user);
+            const userCredentials = await this.authenticationService.login(user);
             isLoginSuccessful = userCredentials !== null ? true : false;
             statusCode = 200;
             message = isLoginSuccessful ? "User logged in successfully" : "User login failed";
@@ -56,7 +57,7 @@ class AuthenticationController {
             res.send(authenticationResponse);
         } catch (error) {
             statusCode = 500;
-            message = authenticationService.getErrorMessageFromErrorCode(error);
+            message = this.authenticationService.getErrorMessageFromErrorCode(error);
             authenticationResponse = new AuthenticationResponseContract(null, isLoginSuccessful, statusCode, message);
 
             res.send(authenticationResponse)

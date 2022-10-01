@@ -1,14 +1,20 @@
 import { Issue } from "@prisma/client";
 import IssueContract from "../contracts/IssueContract";
-import { issuesRepository } from "../repositories/IssuesRepository";
+import IssuesRepository from "../repositories/IssuesRepository";
 
-class IssuesService {
+export default class IssuesService {
+    private issuesRepository: IssuesRepository;
+
+    constructor(issuesRepository: IssuesRepository) {
+        this.issuesRepository = issuesRepository;
+    }
+
     async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 
         const isIssueValid = this.validateIssueFields(issueToCreate);
         let issue = {} as Issue;
 
         if (isIssueValid) { 
-            issue = await issuesRepository.createIssue(issueToCreate);
+            issue = await this.issuesRepository.createIssue(issueToCreate);
         }
 
         return issue;
@@ -34,5 +40,3 @@ class IssuesService {
         return true;
     }
 }
-
-export const issuesService = new IssuesService();
