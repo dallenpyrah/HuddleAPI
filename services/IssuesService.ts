@@ -1,4 +1,3 @@
-import { Issue } from "@prisma/client";
 import IssueContract from "../contracts/IssueContract";
 import IssuesRepository from "../repositories/IssuesRepository";
 
@@ -7,17 +6,6 @@ export default class IssuesService {
 
     constructor(issuesRepository: IssuesRepository) {
         this.issuesRepository = issuesRepository;
-    }
-
-    async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 
-        const isIssueValid = this.validateIssueFields(issueToCreate);
-        let issue = {} as Issue;
-
-        if (isIssueValid) { 
-            issue = await this.issuesRepository.createIssue(issueToCreate);
-        }
-
-        return issue;
     }
 
     validateIssueFields(issueToValidate: IssueContract) : boolean { 

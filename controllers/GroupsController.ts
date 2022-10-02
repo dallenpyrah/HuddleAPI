@@ -8,19 +8,18 @@ class GroupsController {
     private groupsService: GroupsService;
 
     constructor(apiRoute: string, groupsService: GroupsService) {
-        this.router.post(`${apiRoute}/{userId}`, this.jsonParser, this.getUserGroups);
+        this.router.post(`${apiRoute}`, this.jsonParser, this.groupsService.createGroup);
         this.groupsService = groupsService;
     }
 
-    async getUserGroups(req: Request, res: Response ) {
+    async createGroup(req: Request, res: Response) { 
         try {
-            const groups = await this.groupsService.getUserGroups(parseInt(req.params.userId));
+            const groups = await this.groupsService.createGroup(req.body);
             res.status(200).send(groups);
         } catch (error) {
             console.log(error);
             throw error;
         }
     }
-} 
 
-export default GroupsController;
+}

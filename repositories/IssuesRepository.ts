@@ -1,4 +1,4 @@
-import { Issue, PrismaClient } from "@prisma/client";
+import { PrismaClient } from "@prisma/client";
 import IssueContract from "../contracts/IssueContract";
 
 export default class IssuesRepository {
@@ -8,24 +8,24 @@ export default class IssuesRepository {
         this.prisma = prisma;
     }
 
-    async createIssue(issueToCreate: IssueContract) : Promise<Issue> { 
-        try {
-            const createdIssue = await this.prisma.issue.create({
-                data: {
-                    title: issueToCreate.title,
-                    description: issueToCreate.description,
-                    status: issueToCreate.status,
-                    userId: issueToCreate.userId,
-                    language: issueToCreate.language,
-                    framework: issueToCreate.framework,
-                }
-            });
-            return createdIssue;
-        } catch (error) {
-            throw new Error(error);
-        } finally {
-            await this.prisma.$disconnect();
-        }
+    async createIssue(issueToCreate: IssueContract) : Promise<any> { 
+        // try {
+        //     const createdIssue = await this.prisma.issue.create({
+        //         data: {
+        //             title: issueToCreate.title,
+        //             description: issueToCreate.description,
+        //             status: issueToCreate.status,
+        //             userId: issueToCreate.userId,
+        //             language: issueToCreate.language,
+        //             framework: issueToCreate.framework,
+        //         }
+        //     });
+        //     return createdIssue;
+        // } catch (error) {
+        //     throw new Error(error);
+        // } finally {
+        //     await this.prisma.$disconnect();
+        // }
     }
 }
 
