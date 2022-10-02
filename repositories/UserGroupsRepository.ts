@@ -10,12 +10,11 @@ export default class UserGroupsRepository {
     
     async getUserGroups(userId: number) { 
         try {
-            return await this.prisma.group.findMany({
+            return await this.prisma.userGroups.findMany({
                 where: {
-                    Id: userId
-                },
-                select: {
-                    Groups: true
+                    userId: userId
+                }, include: {
+                    group: true
                 }
             });
         } catch (error) {

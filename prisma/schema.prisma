@@ -12,33 +12,33 @@ datasource db {
 }
 
 model User {
-  Id            Int          @id @default(autoincrement())
-  Email         String       @unique 
-  Name          String?
-  CreatedAt     DateTime     @default(now())
-  UpdatedAt     DateTime     @updatedAt
-  Groups        UserGroups[]
-  CreatedGroups Group[]
+  id            Int          @id @default(autoincrement())
+  email         String       @unique
+  name          String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+  groups        UserGroups[]
+  createdGroups Group[]
 }
 
 model Group {
-  Id          Int          @id @default(autoincrement())
-  CreatorId   Int
-  Created     User         @relation(fields: [CreatorId], references: [Id])
-  Name        String
-  Description String
-  CreatedAt   DateTime     @default(now())
-  UpdatedAt   DateTime     @updatedAt
-  Color       String
-  Users       UserGroups[]
+  id          Int          @id @default(autoincrement())
+  creatorId   Int
+  created     User         @relation(fields: [creatorId], references: [id])
+  name        String
+  description String
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  color       String
+  users       UserGroups[]
 }
 
 model UserGroups {
-  Id      Int   @id @default(autoincrement())
-  UserId  Int
-  GroupId Int
-  User    User  @relation(fields: [UserId], references: [Id])
-  Group   Group @relation(fields: [GroupId], references: [Id])
+  id      Int   @id @default(autoincrement())
+  userId  Int
+  groupId Int
+  user    User  @relation(fields: [userId], references: [id])
+  group   Group @relation(fields: [groupId], references: [id])
 
-  @@unique([UserId, GroupId])
+  @@unique([userId, groupId])
 }

@@ -1,4 +1,4 @@
-import { PrismaClient } from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
 import GroupContract from "../contracts/GroupContract";
 
 export default class GroupsRepository { 
@@ -12,10 +12,10 @@ export default class GroupsRepository {
         try {
             const createdGroup = await this.prisma.group.create({
                 data: {
-                    Name: groupToCreate.name,
-                    Description: groupToCreate.description,
-                    CreatorId: groupToCreate.userId,
-                    Color: groupToCreate.color
+                    name: groupToCreate.name,
+                    description: groupToCreate.description,
+                    creatorId: groupToCreate.userId,
+                    color: groupToCreate.color
                 }
             });
             return createdGroup;
