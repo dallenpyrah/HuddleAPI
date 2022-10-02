@@ -5,6 +5,7 @@ export default class UserGroupsService {
 
     constructor(userGroupsRepository: UserGroupsRepository) {
         this.userGroupsRepository = userGroupsRepository
+        this.getUserGroups = this.getUserGroups.bind(this);
     }
 
     async getUserGroups(userId: number) { 
