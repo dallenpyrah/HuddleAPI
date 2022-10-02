@@ -1,15 +1,12 @@
-import bodyParser from "body-parser";
-import express, { Request, Response } from "express";
+import {Request, Response} from "express";
 import UserGroupsService from "../services/UserGroupsService";
 
 class UserGroupsController {
-    public router = express.Router();
-    private jsonParser = bodyParser.json();
     private userGroupsService: UserGroupsService;
 
-    constructor(apiRoute: string, userGroupsService: UserGroupsService) {
-        this.router.get(`${apiRoute}/:userId`, this.jsonParser, this.getUserGroups);
+    constructor(userGroupsService: UserGroupsService) {
         this.userGroupsService = userGroupsService;
+        this.getUserGroups = this.getUserGroups.bind(this);
     }
 
     async getUserGroups(req: Request, res: Response ) {

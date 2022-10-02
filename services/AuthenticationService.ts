@@ -1,5 +1,5 @@
 import UserContract from "../contracts/UserContract";
-import { UserCredential } from "firebase/auth";
+import {UserCredential} from "firebase/auth";
 import IAuthentication from "../interfaces/IAuthentication";
 import AuthenticationRepository from "../repositories/AuthenticationRepository";
 
@@ -8,6 +8,9 @@ export default class AuthenticationService implements IAuthentication {
 
     constructor(authenticationRepository: AuthenticationRepository) {
         this.authenticationRepository = authenticationRepository;
+
+        this.signup = this.signup.bind(this);
+        this.login = this.login.bind(this);
     }
     
     async signup(user: UserContract): Promise<UserCredential> {

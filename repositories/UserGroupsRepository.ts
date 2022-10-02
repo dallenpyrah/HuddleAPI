@@ -1,24 +1,23 @@
-import { PrismaClient } from "@prisma/client";
+import {PrismaClient} from "@prisma/client";
 
 export default class UserGroupsRepository {
     private prisma : PrismaClient;
 
     constructor(prisma: PrismaClient) {
         this.prisma = prisma;
+        this.getUserGroups = this.getUserGroups.bind(this);
     }
     
     async getUserGroups(userId: number) { 
         try {
-            const groups = await this.prisma.user.findMany({
+            return await this.prisma.group.findMany({
                 where: {
                     Id: userId
                 },
-                include: {
+                select: {
                     Groups: true
                 }
             });
-            
-            return groups;
         } catch (error) {
             console.log(error);
         } finally {
