@@ -1,15 +1,13 @@
-import GroupContract from "../contracts/GroupContract";
-import GroupsRepository from "../repositories/GroupsRepository";
+import GroupsRepository from '../repositories/GroupsRepository'
 
 export default class GroupsService {
-    private groupsRepository;
+  private readonly groupsRepository
 
-    constructor(groupsRepository: GroupsRepository) {
-        this.groupsRepository = groupsRepository;
-    }
+  constructor (groupsRepository: GroupsRepository) {
+    this.groupsRepository = groupsRepository
+  }
 
-    async createGroup(groupToCreate: GroupContract) { 
-        const group = await this.groupsRepository.createGroup(groupToCreate);
-        return group;
-    }
+  async createGroup (groupToCreate: any): Promise<any> {
+    return await this.groupsRepository.createGroup(groupToCreate)
+  }
 }

@@ -2,6 +2,7 @@
     "compilerOptions": {
         "allowJs": true,
         "module": "commonjs",
+        "strictNullChecks": true,
         "esModuleInterop": true,
         "target": "es6",
         "noImplicitAny": true,
@@ -18,4 +19,10 @@
     "include": [
         "**/*"
     ],
+    "@typescript-eslint/no-misused-promises": [
+        "error",
+        {
+            "checksVoidReturn": false
+        }
+    ]
 }

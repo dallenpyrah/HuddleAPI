@@ -1,15 +1,15 @@
-import { UserCredential } from "@firebase/auth";
+import { UserCredential } from '@firebase/auth'
 
 export default class AuthenticationResponseContract {
-    userCredentials: UserCredential;
-    isSuccess: boolean;
-    statusCode: number;
-    message: string;
+  userCredentials: UserCredential | undefined
+  isSuccess: boolean
+  statusCode: number
+  message: string
 
-    constructor(userCredentials: UserCredential = null, isSuccess: boolean, statusCode: number, message: string) {
-        this.userCredentials = userCredentials;
-        this.isSuccess = isSuccess;
-        this.statusCode = statusCode;
-        this.message = message;
-    }
+  constructor (isSuccess: boolean, statusCode: number, message: string, userCredentials?: UserCredential) {
+    this.userCredentials = userCredentials
+    this.isSuccess = isSuccess
+    this.statusCode = statusCode
+    this.message = message
+  }
 }

@@ -1,28 +1,24 @@
-import {PrismaClient} from "@prisma/client";
-import GroupContract from "../contracts/GroupContract";
+import { Group, PrismaClient } from '@prisma/client'
 
-export default class GroupsRepository { 
-    private prisma: PrismaClient;
+export default class GroupsRepository {
+  private readonly prisma: PrismaClient
 
-    constructor(prisma: PrismaClient) {
-        this.prisma = prisma;
-    }
+  constructor (prisma: PrismaClient) {
+    this.prisma = prisma
+  }
 
-    async createGroup(groupToCreate: GroupContract) { 
-        try {
-            const createdGroup = await this.prisma.group.create({
-                data: {
-                    name: groupToCreate.name,
-                    description: groupToCreate.description,
-                    creatorId: groupToCreate.userId,
-                    color: groupToCreate.color
-                }
-            });
-            return createdGroup;
-        } catch (error) {
-            throw new Error(error);
-        } finally {
-            await this.prisma.$disconnect();
+  async createGroup (groupToCreate: any): Promise<Group> {
+    try {
+      return await this.prisma.group.create({
+        data: {
+          name: groupToCreate.name,
+          description: groupToCreate.description,
+          creatorId: groupToCreate.userId,
+          color: groupToCreate.color
         }
+      })
+    } finally {
+      await this.prisma.$disconnect()
     }
+  }
 }

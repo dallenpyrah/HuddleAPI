@@ -1,16 +1,15 @@
-import UserGroupsRepository from "../repositories/UserGroupsRepository";
-import {UserGroups} from "@prisma/client";
+import UserGroupsRepository from '../repositories/UserGroupsRepository'
+import { UserGroups } from '@prisma/client'
 
 export default class UserGroupsService {
-    private userGroupsRepository;
+  private readonly userGroupsRepository
 
-    constructor(userGroupsRepository: UserGroupsRepository) {
-        this.userGroupsRepository = userGroupsRepository
-        this.getUserGroups = this.getUserGroups.bind(this);
-    }
+  constructor (userGroupsRepository: UserGroupsRepository) {
+    this.userGroupsRepository = userGroupsRepository
+    this.getUserGroups = this.getUserGroups.bind(this)
+  }
 
-    async getUserGroups(userId: number): Promise<UserGroups[]> {
-        return await this.userGroupsRepository.getUserGroups(userId);
-    }
-
+  async getUserGroups (userId: number): Promise<UserGroups[]> {
+    return await this.userGroupsRepository.getUserGroups(userId)
+  }
 }
