@@ -2,8 +2,9 @@ import UserContract from '../contracts/UserContract'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
 import { auth } from '../firebase-config'
 import { PrismaClient } from '@prisma/client'
+import IAuthentication from '../interfaces/IAuthentication'
 
-export default class AuthenticationRepository {
+export default class AuthenticationRepository implements IAuthentication {
   private readonly prisma: PrismaClient
 
   constructor (prisma: PrismaClient) {

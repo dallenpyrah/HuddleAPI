@@ -1,12 +1,11 @@
 import UserContract from '../contracts/UserContract'
 import { UserCredential } from 'firebase/auth'
 import IAuthentication from '../interfaces/IAuthentication'
-import AuthenticationRepository from '../repositories/AuthenticationRepository'
 
 export default class AuthenticationService implements IAuthentication {
-  private readonly authenticationRepository: AuthenticationRepository
+  private readonly authenticationRepository: IAuthentication
 
-  constructor (authenticationRepository: AuthenticationRepository) {
+  constructor (authenticationRepository: IAuthentication) {
     this.authenticationRepository = authenticationRepository
 
     this.signup = this.signup.bind(this)
@@ -17,7 +16,10 @@ export default class AuthenticationService implements IAuthentication {
     user.fullName = user.fullName.toLowerCase()
     user.email = user.email.toLowerCase()
 
-    if (user.email.length < 1 || user.password.length < 1 || user.fullName.length < 1) {
+    if (user.email.length < 1 ||
+        user.password.length < 1 ||
+        user.confirmPassword.length < 1 ||
+        user.fullName.length < 1) {
       throw new Error('All fields are required')
     }
 
