@@ -9,7 +9,7 @@
     "ansi-styles": "^3.2.1",
     "argparse": "^1.0.10",
     "array-flatten": "^1.1.1",
-    "balanced-match": "^1.0.2",
+    "balanced-match": "^2.0.0",
     "body-parser": "^1.20.0",
     "brace-expansion": "^1.1.11",
     "builtin-modules": "^1.1.1",
