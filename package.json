@@ -57,7 +57,7 @@
     "is-core-module": "^2.10.0",
     "js-tokens": "^4.0.0",
     "js-yaml": "^3.14.1",
-    "media-typer": "^0.3.0",
+    "media-typer": "^1.1.0",
     "merge-descriptors": "^1.0.1",
     "methods": "^1.1.2",
     "mime": "^1.6.0",
