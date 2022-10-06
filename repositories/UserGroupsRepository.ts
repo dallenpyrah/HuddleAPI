@@ -1,14 +1,15 @@
-import {PrismaClient} from "@prisma/client";
+import {PrismaClient, UserGroups} from "@prisma/client";
+import IUserGroup from "../interfaces/IUserGroup";
 
-export default class UserGroupsRepository {
-    private prisma : PrismaClient;
+export default class UserGroupsRepository implements IUserGroup {
+    private prisma: PrismaClient;
 
     constructor(prisma: PrismaClient) {
         this.prisma = prisma;
         this.getUserGroups = this.getUserGroups.bind(this);
     }
-    
-    async getUserGroups(userId: number) { 
+
+    async getUserGroups(userId: number): Promise<UserGroups[]> {
         try {
             return await this.prisma.userGroups.findMany({
                 where: {

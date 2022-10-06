@@ -1,8 +1,8 @@
 import bodyParser from "body-parser";
-import express, { Request, Response } from "express";
+import express, {Request, Response} from "express";
 import GroupsService from "../services/GroupsService";
 
-class GroupsController {
+export default class GroupsController {
     public router = express.Router();
     private jsonParser = bodyParser.json();
     private groupsService: GroupsService;
@@ -12,7 +12,7 @@ class GroupsController {
         this.groupsService = groupsService;
     }
 
-    async createGroup(req: Request, res: Response) { 
+    async createGroup(req: Request, res: Response): Promise<void> {
         try {
             const groups = await this.groupsService.createGroup(req.body);
             res.status(200).send(groups);

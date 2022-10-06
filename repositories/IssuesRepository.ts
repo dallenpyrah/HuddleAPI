@@ -1,31 +1,25 @@
-import { PrismaClient } from "@prisma/client";
-import IssueContract from "../contracts/IssueContract";
+import {Issue, PrismaClient} from "@prisma/client";
+import IIssue from "../interfaces/IIssue";
 
-export default class IssuesRepository {
-    private prisma: PrismaClient;
+export default class IssuesRepository implements IIssue {
+    private prismaClient: PrismaClient;
 
-    constructor(prisma: PrismaClient) {
-        this.prisma = prisma;
+    constructor(prismaClient: PrismaClient) {
+        this.prismaClient = prismaClient;
+        this.getUserIssues = this.getUserIssues.bind(this);
     }
 
-    async createIssue(issueToCreate: IssueContract) : Promise<any> { 
-        // try {
-        //     const createdIssue = await this.prisma.issue.create({
-        //         data: {
-        //             title: issueToCreate.title,
-        //             description: issueToCreate.description,
-        //             status: issueToCreate.status,
-        //             userId: issueToCreate.userId,
-        //             language: issueToCreate.language,
-        //             framework: issueToCreate.framework,
-        //         }
-        //     });
-        //     return createdIssue;
-        // } catch (error) {
-        //     throw new Error(error);
-        // } finally {
-        //     await this.prisma.$disconnect();
-        // }
+    async getUserIssues(userId: number): Promise<Issue[]> {
+        try {
+            return await this.prismaClient.issue.findMany({
+                where: {
+                    userId: userId
+                }
+            });
+        } catch (error) {
+            console.log(error);
+        } finally {
+            await this.prismaClient.$disconnect();
+        }
     }
 }
-

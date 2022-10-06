@@ -1,7 +1,7 @@
 import {Request, Response} from "express";
 import UserGroupsService from "../services/UserGroupsService";
 
-class UserGroupsController {
+export default class UserGroupsController {
     private userGroupsService: UserGroupsService;
 
     constructor(userGroupsService: UserGroupsService) {
@@ -9,15 +9,13 @@ class UserGroupsController {
         this.getUserGroups = this.getUserGroups.bind(this);
     }
 
-    async getUserGroups(req: Request, res: Response ) {
+    async getUserGroups(req: Request, res: Response): Promise<void> {
         try {
             const groups = await this.userGroupsService.getUserGroups(parseInt(req.params.userId));
             res.status(200).send(groups);
         } catch (error) {
             console.log(error);
-            throw error;
+            res.status(500).send(error);
         }
     }
-} 
-
-export default UserGroupsController;
+}

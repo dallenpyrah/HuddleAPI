@@ -19,6 +19,8 @@ model User {
   updatedAt     DateTime     @updatedAt
   groups        UserGroups[]
   createdGroups Group[]
+  Issue         Issue[]
+  Comment       Comment[]
 }
 
 model Group {
@@ -31,6 +33,7 @@ model Group {
   updatedAt   DateTime     @updatedAt
   color       String
   users       UserGroups[]
+  Issue       Issue[]
 }
 
 model UserGroups {
@@ -41,4 +44,31 @@ model UserGroups {
   group   Group @relation(fields: [groupId], references: [id])
 
   @@unique([userId, groupId])
+}
+
+model Issue {
+  id          Int       @id @default(autoincrement())
+  groupId     Int
+  group       Group     @relation(fields: [groupId], references: [id])
+  title       String
+  description String
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  status      String
+  userId      Int
+  user        User      @relation(fields: [userId], references: [id])
+  comments    Comment[]
+  language    String
+  framework   String
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  issueId   Int
+  issue     Issue    @relation(fields: [issueId], references: [id])
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  content   String
 }

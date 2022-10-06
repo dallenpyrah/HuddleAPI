@@ -1,17 +1,24 @@
-import IssueContract from "../contracts/IssueContract";
-import express, { Request, Response } from 'express';
-import bodyParser from "body-parser";
+import {Request, Response} from "express";
 import IssuesService from "../services/IssuesService";
 
 
-class IssuesController { 
-    public router = express.Router();
-    public issuesService: IssuesService;
-    private jsonParser = bodyParser.json();
+export default class IssuesController {
+    private userIssuesService: IssuesService;
 
-    constructor(apiRoute: string, issuesService: IssuesService){
-        this.issuesService = issuesService
+    constructor(userIssuesService: IssuesService) {
+        this.userIssuesService = userIssuesService;
+        this.getUserIssues = this.getUserIssues.bind(this);
     }
-}
 
-export default IssuesController;
+    async getUserIssues(req: Request, res: Response): Promise<void> {
+        try {
+            const userId = parseInt(req.params.userId);
+            const issues = await this.userIssuesService.getUserIssues(userId);
+            res.status(200).send(issues);
+        } catch (error) {
+            console.log(error);
+            res.status(500).send(error);
+        }
+    }
+
+}

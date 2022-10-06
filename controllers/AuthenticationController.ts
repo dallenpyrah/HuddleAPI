@@ -3,7 +3,7 @@ import {Request, Response} from 'express'
 import AuthenticationService from '../services/AuthenticationService';
 import AuthenticationResponseContract from '../contracts/AuthenticationResponseContract';
 
-class AuthenticationController {
+export default class AuthenticationController {
     private authenticationService: AuthenticationService;
 
     constructor(authenticationService: AuthenticationService) {
@@ -11,8 +11,8 @@ class AuthenticationController {
         this.signup = this.signup.bind(this);
         this.login = this.login.bind(this);
     }
-    
-    async signup(req: Request, res: Response){
+
+    async signup(req: Request, res: Response): Promise<void> {
         let isSignUpSuccessful = false;
         let statusCode = 0;
         let message = "";
@@ -36,7 +36,7 @@ class AuthenticationController {
         }
     }
 
-    async login(req: Request, res: Response){
+    async login(req: Request, res: Response): Promise<void> {
         let isLoginSuccessful = false;
         let statusCode = 0;
         let message = "";
@@ -60,5 +60,3 @@ class AuthenticationController {
         }
     }
 }
-
-export default AuthenticationController;
