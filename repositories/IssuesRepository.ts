@@ -6,10 +6,10 @@ export default class IssuesRepository implements IIssue {
 
   constructor (prismaClient: PrismaClient) {
     this.prismaClient = prismaClient
-    this.getUserIssues = this.getUserIssues.bind(this)
+    this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
   }
 
-  async getUserIssues (userId: number): Promise<Issue[]> {
+  async getIssuesByUserId (userId: number): Promise<Issue[]> {
     try {
       return await this.prismaClient.issue.findMany({
         where: {

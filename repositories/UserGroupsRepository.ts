@@ -6,10 +6,10 @@ export default class UserGroupsRepository implements IUserGroup {
 
   constructor (prisma: PrismaClient) {
     this.prisma = prisma
-    this.getUserGroups = this.getUserGroups.bind(this)
+    this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
   }
 
-  async getUserGroups (userId: number): Promise<UserGroups[]> {
+  async getUserGroupsByUserId (userId: number): Promise<UserGroups[]> {
     try {
       return await this.prisma.userGroups.findMany({
         where: {

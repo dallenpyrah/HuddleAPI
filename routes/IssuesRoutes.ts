@@ -23,6 +23,6 @@ export default class IssuesRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userId`, this.issuesController.getUserIssues as RequestHandler)
+    this.app.get(`${this.apiPath}/:userId`, this.issuesController.getIssuesByUserId as RequestHandler)
   }
 }

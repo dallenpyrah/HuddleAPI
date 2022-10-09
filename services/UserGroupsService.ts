@@ -6,10 +6,10 @@ export default class UserGroupsService {
 
   constructor (userGroupsRepository: UserGroupsRepository) {
     this.userGroupsRepository = userGroupsRepository
-    this.getUserGroups = this.getUserGroups.bind(this)
+    this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
   }
 
-  async getUserGroups (userId: number): Promise<UserGroups[]> {
-    return await this.userGroupsRepository.getUserGroups(userId)
+  async getUserGroupsByUserId (userId: number): Promise<UserGroups[]> {
+    return await this.userGroupsRepository.getUserGroupsByUserId(userId)
   }
 }

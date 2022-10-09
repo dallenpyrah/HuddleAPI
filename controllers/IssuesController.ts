@@ -8,13 +8,13 @@ export default class IssuesController {
 
   constructor (userIssuesService: IssuesService) {
     this.userIssuesService = userIssuesService
-    this.getUserIssues = this.getUserIssues.bind(this)
+    this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
   }
 
-  async getUserIssues (req: Request, res: Response): Promise<void> {
+  async getIssuesByUserId (req: Request, res: Response): Promise<void> {
     try {
       const userId = parseInt(req.params.userId)
-      const issues = await this.userIssuesService.getUserIssues(userId)
+      const issues = await this.userIssuesService.getIssuesByUserId(userId)
       res.status(200).send(issues)
     } catch (error) {
       this.logger.error(error)

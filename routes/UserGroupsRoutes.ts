@@ -23,6 +23,6 @@ export default class UserGroupsRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userId`, this.userGroupsController.getUserGroups as RequestHandler)
+    this.app.get(`${this.apiPath}/:userId`, this.userGroupsController.getUserGroupsByUserId as RequestHandler)
   }
 }

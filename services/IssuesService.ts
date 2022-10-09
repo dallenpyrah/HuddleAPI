@@ -6,10 +6,10 @@ export default class IssuesService {
 
   constructor (userIssuesRepository: IIssue) {
     this.userIssuesRepository = userIssuesRepository
-    this.getUserIssues = this.getUserIssues.bind(this)
+    this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
   }
 
-  async getUserIssues (userId: number): Promise<Issue[]> {
-    return await this.userIssuesRepository.getUserIssues(userId)
+  async getIssuesByUserId (userId: number): Promise<Issue[]> {
+    return await this.userIssuesRepository.getIssuesByUserId(userId)
   }
 }

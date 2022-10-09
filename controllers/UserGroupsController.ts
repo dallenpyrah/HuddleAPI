@@ -8,12 +8,12 @@ export default class UserGroupsController {
 
   constructor (userGroupsService: UserGroupsService) {
     this.userGroupsService = userGroupsService
-    this.getUserGroups = this.getUserGroups.bind(this)
+    this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
   }
 
-  async getUserGroups (req: Request, res: Response): Promise<void> {
+  async getUserGroupsByUserId (req: Request, res: Response): Promise<void> {
     try {
-      const groups = await this.userGroupsService.getUserGroups(parseInt(req.params.userId))
+      const groups = await this.userGroupsService.getUserGroupsByUserId(parseInt(req.params.userId))
       res.status(200).send(groups)
     } catch (error) {
       this.logger.error(error)
