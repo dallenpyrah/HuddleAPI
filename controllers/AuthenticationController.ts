@@ -2,9 +2,11 @@ import UserContract from '../contracts/UserContract'
 import { Request, Response } from 'express'
 import AuthenticationService from '../services/AuthenticationService'
 import AuthenticationResponseContract from '../contracts/AuthenticationResponseContract'
+import pino from 'pino'
 
 export default class AuthenticationController {
   private readonly authenticationService: AuthenticationService
+  private readonly logger = pino({ prettyPrint: true })
 
   constructor (authenticationService: AuthenticationService) {
     this.authenticationService = authenticationService
@@ -31,7 +33,7 @@ export default class AuthenticationController {
       statusCode = 500
       message = this.authenticationService.getErrorMessageFromErrorCode(error)
       authenticationResponse = new AuthenticationResponseContract(isSignUpSuccessful, statusCode, message)
-
+      this.logger.error(authenticationResponse)
       res.send(authenticationResponse)
     }
   }
@@ -55,7 +57,7 @@ export default class AuthenticationController {
       statusCode = 500
       message = this.authenticationService.getErrorMessageFromErrorCode(error)
       authenticationResponse = new AuthenticationResponseContract(isLoginSuccessful, statusCode, message)
-
+      this.logger.error(authenticationResponse)
       res.send(authenticationResponse)
     }
   }

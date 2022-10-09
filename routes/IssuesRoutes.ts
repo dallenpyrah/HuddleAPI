@@ -2,7 +2,7 @@ import IssuesRepository from '../repositories/IssuesRepository'
 import IssuesService from '../services/IssuesService'
 import IssuesController from '../controllers/IssuesController'
 import { PrismaClient } from '@prisma/client'
-import { Application } from 'express'
+import { Application, RequestHandler } from 'express'
 
 export default class IssuesRoutes {
   private readonly app: Application
@@ -23,6 +23,6 @@ export default class IssuesRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userId`, () => this.issuesController.getUserIssues)
+    this.app.get(`${this.apiPath}/:userId`, this.issuesController.getUserIssues as RequestHandler)
   }
 }

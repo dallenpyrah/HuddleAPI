@@ -1,8 +1,10 @@
 import { Request, Response } from 'express'
 import UserGroupsService from '../services/UserGroupsService'
+import pino from 'pino'
 
 export default class UserGroupsController {
   private readonly userGroupsService: UserGroupsService
+  private readonly logger = pino({ prettyPrint: true })
 
   constructor (userGroupsService: UserGroupsService) {
     this.userGroupsService = userGroupsService
@@ -14,7 +16,7 @@ export default class UserGroupsController {
       const groups = await this.userGroupsService.getUserGroups(parseInt(req.params.userId))
       res.status(200).send(groups)
     } catch (error) {
-      console.log(error)
+      this.logger.error(error)
       res.status(500).send(error)
     }
   }

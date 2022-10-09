@@ -1,4 +1,4 @@
-import { Application } from 'express'
+import { Application, RequestHandler } from 'express'
 import { PrismaClient } from '@prisma/client'
 import AuthenticationService from '../services/AuthenticationService'
 import AuthenticationRepository from '../repositories/AuthenticationRepository'
@@ -23,7 +23,7 @@ export default class AuthenticationRoutes {
   }
 
   createRoutes (): void {
-    this.app.post(`${this.apiPath}/login`, () => this.authenticationController.login)
-    this.app.post(`${this.apiPath}/signup`, () => this.authenticationController.signup)
+    this.app.post(`${this.apiPath}/login`, this.authenticationController.login as RequestHandler)
+    this.app.post(`${this.apiPath}/signup`, this.authenticationController.signup as RequestHandler)
   }
 }

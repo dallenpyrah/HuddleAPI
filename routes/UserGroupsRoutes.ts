@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { RequestHandler } from 'express'
 import UserGroupsController from '../controllers/UserGroupsController'
 import UserGroupsService from '../services/UserGroupsService'
 import UserGroupsRepository from '../repositories/UserGroupsRepository'
@@ -23,6 +23,6 @@ export default class UserGroupsRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userId`, () => this.userGroupsController.getUserGroups)
+    this.app.get(`${this.apiPath}/:userId`, this.userGroupsController.getUserGroups as RequestHandler)
   }
 }
