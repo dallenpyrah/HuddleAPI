@@ -7,7 +7,7 @@ export default class GroupsController {
   public router = express.Router()
   private readonly jsonParser = bodyParser.json()
   private readonly groupsService: GroupsService
-  private readonly logger = pino({ prettyPrint: true })
+  private readonly logger = pino()
 
   constructor (apiRoute: string, groupsService: GroupsService) {
     this.router.post(`${apiRoute}`, this.jsonParser, this.groupsService.createGroup)

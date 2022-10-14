@@ -1,8 +1,6 @@
-import UserContract from '../contracts/UserContract'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from 'firebase/auth'
-import { auth } from '../firebase-config'
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, User } from '@prisma/client'
 import IAuthentication from '../interfaces/IAuthentication'
+import { User as FireBaseUser } from '@firebase/auth'
 
 export default class AuthenticationRepository implements IAuthentication {
   private readonly prisma: PrismaClient
@@ -10,12 +8,17 @@ export default class AuthenticationRepository implements IAuthentication {
   constructor (prisma: PrismaClient) {
     this.prisma = prisma
     this.signup = this.signup.bind(this)
-    this.login = this.login.bind(this)
   }
 
-  async signup (user: UserContract): Promise<UserCredential> {
+  async signup (user: FireBaseUser): Promise<User> {
     try {
-      return await createUserWithEmailAndPassword(auth, user.email, user.password)
+      return await this.prisma.user.create({
+        data: {
+          email: user.email ?? '',
+          name: user.displayName,
+          fireBaseUserId: user.uid
+        }
+      })
     } catch (error) {
       throw new Error(error)
     } finally {
@@ -23,9 +26,13 @@ export default class AuthenticationRepository implements IAuthentication {
     }
   }
 
-  async login (user: UserContract): Promise<UserCredential> {
+  async getUser (user: FireBaseUser): Promise<User | null> {
     try {
-      return await signInWithEmailAndPassword(auth, user.email, user.password)
+      return await this.prisma.user.findUnique({
+        where: {
+          fireBaseUserId: user.uid
+        }
+      })
     } catch (error) {
       throw new Error(error)
     } finally {

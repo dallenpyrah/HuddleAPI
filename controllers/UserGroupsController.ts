@@ -4,16 +4,16 @@ import pino from 'pino'
 
 export default class UserGroupsController {
   private readonly userGroupsService: UserGroupsService
-  private readonly logger = pino({ prettyPrint: true })
+  private readonly logger = pino()
 
   constructor (userGroupsService: UserGroupsService) {
     this.userGroupsService = userGroupsService
-    this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
+    this.getUserGroupsByFireBaseId = this.getUserGroupsByFireBaseId.bind(this)
   }
 
-  async getUserGroupsByUserId (req: Request, res: Response): Promise<void> {
+  async getUserGroupsByFireBaseId (req: Request, res: Response): Promise<void> {
     try {
-      const groups = await this.userGroupsService.getUserGroupsByUserId(parseInt(req.params.userId))
+      const groups = await this.userGroupsService.getUserGroupsByFireBaseId(req.params.userId)
       res.status(200).send(groups)
     } catch (error) {
       this.logger.error(error)

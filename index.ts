@@ -2,9 +2,11 @@ import express from 'express'
 import UserGroupsRoutes from './routes/UserGroupsRoutes'
 import AuthenticationRoutes from './routes/AuthenticationRoutes'
 import IssuesRoutes from './routes/IssuesRoutes'
-import pino from 'pino'
+import bodyParser from 'body-parser'
 
 const app = express()
+const jsonParser = bodyParser.json()
+app.use(jsonParser)
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
@@ -12,7 +14,6 @@ app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', 'true')
   next()
 })
-app.use(pino)
 
 const userGroupsRoutes = new UserGroupsRoutes(app)
 const authenticationRoutes = new AuthenticationRoutes(app)

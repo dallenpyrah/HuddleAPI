@@ -4,17 +4,17 @@ import pino from 'pino'
 
 export default class IssuesController {
   private readonly userIssuesService: IssuesService
-  private readonly logger = pino({ prettyPrint: true })
+  private readonly logger = pino()
 
   constructor (userIssuesService: IssuesService) {
     this.userIssuesService = userIssuesService
-    this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
+    this.getIssuesByFireBaseId = this.getIssuesByFireBaseId.bind(this)
   }
 
-  async getIssuesByUserId (req: Request, res: Response): Promise<void> {
+  async getIssuesByFireBaseId (req: Request, res: Response): Promise<void> {
     try {
-      const userId = parseInt(req.params.userId)
-      const issues = await this.userIssuesService.getIssuesByUserId(userId)
+      const fireBaseId = req.params.userId
+      const issues = await this.userIssuesService.getIssuesByFireBaseId(fireBaseId)
       res.status(200).send(issues)
     } catch (error) {
       this.logger.error(error)

@@ -23,7 +23,6 @@ export default class AuthenticationRoutes {
   }
 
   createRoutes (): void {
-    this.app.post(`${this.apiPath}/login`, this.authenticationController.login as RequestHandler)
     this.app.post(`${this.apiPath}/signup`, this.authenticationController.signup as RequestHandler)
   }
 }

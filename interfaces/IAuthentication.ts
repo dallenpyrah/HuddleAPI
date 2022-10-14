@@ -1,7 +1,7 @@
-import UserContract from '../contracts/UserContract'
-import { UserCredential } from 'firebase/auth'
+import { User } from '@prisma/client'
+import { User as FireBaseUser } from '@firebase/auth'
 
 export default interface IAuthentication {
-  login: (user: UserContract) => Promise<UserCredential>
-  signup: (user: UserContract) => Promise<UserCredential>
+  signup: (user: FireBaseUser) => Promise<User>
+  getUser: (user: FireBaseUser) => Promise<User | null>
 }
