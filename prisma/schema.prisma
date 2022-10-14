@@ -22,6 +22,7 @@ model User {
   createdGroups Group[]
   Issue         Issue[]
   Comment       Comment[]
+  Notification  Notification[]
 }
 
 model Group {
@@ -72,4 +73,14 @@ model Comment {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   content   String
+}
+
+model Notification {
+    id        Int      @id @default(autoincrement())
+    userId    Int
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    content   String
+    type      String
 }
