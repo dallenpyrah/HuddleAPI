@@ -3,6 +3,7 @@ import UserGroupsRoutes from './routes/UserGroupsRoutes'
 import AuthenticationRoutes from './routes/AuthenticationRoutes'
 import IssuesRoutes from './routes/IssuesRoutes'
 import bodyParser from 'body-parser'
+import NotificationRoutes from './routes/NotificationRoutes'
 
 const app = express()
 const jsonParser = bodyParser.json()
@@ -18,10 +19,12 @@ app.use(function (req, res, next) {
 const userGroupsRoutes = new UserGroupsRoutes(app)
 const authenticationRoutes = new AuthenticationRoutes(app)
 const issuesRoutes = new IssuesRoutes(app)
+const notificationRoutes = new NotificationRoutes(app)
 
 userGroupsRoutes.createRoutes()
 authenticationRoutes.createRoutes()
 issuesRoutes.createRoutes()
+notificationRoutes.createRoutes()
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

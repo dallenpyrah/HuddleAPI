@@ -1,5 +1,5 @@
 import INotificationRepository from '../interfaces/INotificationRepository'
-import { PrismaClient } from '@prisma/client'
+import { Notification, PrismaClient } from '@prisma/client'
 import pino from 'pino'
 
 export default class NotificationRepository implements INotificationRepository {
@@ -12,7 +12,7 @@ export default class NotificationRepository implements INotificationRepository {
     this.getNotificationsByUserId = this.getNotificationsByUserId.bind(this)
   }
 
-  async getNotificationsByUserId (userId: number): Promise<Notification[]> {
+  async getNotificationsByUserId (userId: number): Promise<Notification[] | undefined> {
     try {
       return await this.prismaClient.notification.findMany({
         where: {
