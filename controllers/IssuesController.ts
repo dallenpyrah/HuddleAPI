@@ -3,18 +3,41 @@ import IssuesService from '../services/IssuesService'
 import pino from 'pino'
 
 export default class IssuesController {
-  private readonly userIssuesService: IssuesService
+  private readonly issuesService: IssuesService
   private readonly logger = pino()
 
-  constructor (userIssuesService: IssuesService) {
-    this.userIssuesService = userIssuesService
+  constructor (issuesService: IssuesService) {
+    this.issuesService = issuesService
     this.getIssuesByFireBaseId = this.getIssuesByFireBaseId.bind(this)
+    this.getCommunityIssues = this.getCommunityIssues.bind(this)
+    this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
   }
 
   async getIssuesByFireBaseId (req: Request, res: Response): Promise<void> {
     try {
       const fireBaseId = req.params.userId
-      const issues = await this.userIssuesService.getIssuesByFireBaseId(fireBaseId)
+      const issues = await this.issuesService.getIssuesByFireBaseId(fireBaseId)
+      res.status(200).send(issues)
+    } catch (error) {
+      this.logger.error(error)
+      res.status(500).send(error)
+    }
+  }
+
+  async getCommunityIssues (req: Request, res: Response): Promise<void> {
+    try {
+      const issues = await this.issuesService.getCommunityIssues()
+      res.status(200).send(issues)
+    } catch (error) {
+      this.logger.error(error)
+      res.status(500).send(error)
+    }
+  }
+
+  async getFilteredCommunityIssues (req: Request, res: Response): Promise<void> {
+    try {
+      const filter = req.params.filter
+      const issues = await this.issuesService.getFilteredCommunityIssues(filter)
       res.status(200).send(issues)
     } catch (error) {
       this.logger.error(error)
