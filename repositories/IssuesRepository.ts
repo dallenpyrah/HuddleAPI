@@ -27,9 +27,15 @@ export default class IssuesRepository implements IIssue {
     }
   }
 
-  async getCommunityIssues (): Promise<Issue[] | undefined> {
+  async getCommunityIssues (limit: number, afterId: number): Promise<Issue[] | undefined> {
     try {
       return await this.prismaClient.issue.findMany({
+        where: {
+          id: {
+            gt: afterId
+          }
+        },
+        take: limit,
         include: {
           user: true,
           group: true
@@ -48,11 +54,6 @@ export default class IssuesRepository implements IIssue {
         where: {
           title: {
             contains: filter
-          },
-          OR: {
-            description: {
-              contains: filter
-            }
           }
         },
         include: {

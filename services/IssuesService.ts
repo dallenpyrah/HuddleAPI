@@ -24,8 +24,8 @@ export default class IssuesService {
     }
   }
 
-  async getCommunityIssues (): Promise<Issue[]> {
-    const communityIssues = await this.issuesRepository.getCommunityIssues()
+  async getCommunityIssues (limit: number, afterId: number): Promise<Issue[]> {
+    const communityIssues = await this.issuesRepository.getCommunityIssues(limit, afterId)
 
     if (communityIssues != null) {
       return communityIssues

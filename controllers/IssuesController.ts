@@ -26,7 +26,9 @@ export default class IssuesController {
 
   async getCommunityIssues (req: Request, res: Response): Promise<void> {
     try {
-      const issues = await this.issuesService.getCommunityIssues()
+      const limit = parseInt(req.params.limit)
+      const afterId = parseInt(req.params.afterId)
+      const issues = await this.issuesService.getCommunityIssues(limit, afterId)
       res.status(200).send(issues)
     } catch (error) {
       this.logger.error(error)
