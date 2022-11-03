@@ -1,26 +1,23 @@
-import bodyParser from 'body-parser'
-import express, { Request, Response } from 'express'
 import GroupsService from '../services/GroupsService'
 import pino from 'pino'
+import { Request, Response } from 'express'
 
 export default class GroupsController {
-  public router = express.Router()
-  private readonly jsonParser = bodyParser.json()
   private readonly groupsService: GroupsService
   private readonly logger = pino()
 
-  constructor (apiRoute: string, groupsService: GroupsService) {
-    this.router.post(`${apiRoute}`, this.jsonParser, this.groupsService.createGroup)
+  constructor (groupsService: GroupsService) {
     this.groupsService = groupsService
+    this.getNewestGroups = this.getNewestGroups.bind(this)
   }
 
-  async createGroup (req: Request, res: Response): Promise<void> {
+  async getNewestGroups (req: Request, res: Response): Promise<void> {
     try {
-      const groups = await this.groupsService.createGroup(req.body)
-      res.status(200).send(groups)
-    } catch (error) {
-      this.logger.error(error)
-      throw error
+      const groups = await this.groupsService.getNewestGroups()
+      res.send(groups).status(200)
+    } catch (e) {
+      this.logger.error(e)
+      res.send(e).status(500)
     }
   }
 }

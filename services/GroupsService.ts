@@ -1,13 +1,15 @@
-import GroupsRepository from '../repositories/GroupsRepository'
+import IGroupsRepository from '../interfaces/IGroupsRepository'
+import { Group } from '@prisma/client'
 
 export default class GroupsService {
-  private readonly groupsRepository
+  private readonly groupsRepository: IGroupsRepository
 
-  constructor (groupsRepository: GroupsRepository) {
+  constructor (groupsRepository: IGroupsRepository) {
     this.groupsRepository = groupsRepository
+    this.getNewestGroups = this.getNewestGroups.bind(this)
   }
 
-  async createGroup (groupToCreate: any): Promise<any> {
-    return await this.groupsRepository.createGroup(groupToCreate)
+  async getNewestGroups (): Promise<Group[] | undefined> {
+    return await this.groupsRepository.getNewestGroups()
   }
 }
