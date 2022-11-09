@@ -30,6 +30,6 @@ export default class NotificationRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userId`, this.notificationController.getNotificationsByFireBaseUserId as RequestHandler)
+    this.app.get(`${this.apiPath}/:userFireBaseId`, this.notificationController.getNotificationsByFireBaseUserId as RequestHandler)
   }
 }

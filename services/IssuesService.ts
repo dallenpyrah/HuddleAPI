@@ -15,7 +15,7 @@ export default class IssuesService {
   }
 
   async getIssuesByFireBaseId (fireBaseUserId: string): Promise<Issue[]> {
-    const user = await this.userRepository.getUserIdByFireBaseId(fireBaseUserId)
+    const user = await this.userRepository.getUserByFireBaseId(fireBaseUserId)
 
     if (user != null) {
       return await this.issuesRepository.getIssuesByUserId(user.id)

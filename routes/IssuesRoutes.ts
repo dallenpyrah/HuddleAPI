@@ -27,7 +27,7 @@ export default class IssuesRoutes {
 
   createRoutes (): void {
     this.app.get(`${this.apiPath}/:userId`, this.issuesController.getIssuesByFireBaseId as RequestHandler)
-    this.app.get(`${this.apiPath}/community/:limit/:afterId`, this.issuesController.getCommunityIssues as RequestHandler)
-    this.app.get(`${this.apiPath}/community/:filter`, this.issuesController.getFilteredCommunityIssues as RequestHandler)
+    this.app.get(`${this.apiPath}/:limit/:afterId`, this.issuesController.getCommunityIssues as RequestHandler)
+    this.app.get(`${this.apiPath}/:filter`, this.issuesController.getFilteredCommunityIssues as RequestHandler)
   }
 }

@@ -7,6 +7,7 @@ export default class UserGroupsRepository implements IUserGroup {
   constructor (prisma: PrismaClient) {
     this.prisma = prisma
     this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
+    this.createUserGroup = this.createUserGroup.bind(this)
   }
 
   async getUserGroupsByUserId (userId: number): Promise<UserGroups[]> {
@@ -17,6 +18,27 @@ export default class UserGroupsRepository implements IUserGroup {
         },
         include: {
           group: true
+        }
+      })
+    } finally {
+      await this.prisma.$disconnect()
+    }
+  }
+
+  async createUserGroup (userGroup: any): Promise<UserGroups> {
+    try {
+      return await this.prisma.userGroups.create({
+        data: {
+          user: {
+            connect: {
+              id: userGroup.created.id
+            }
+          },
+          group: {
+            connect: {
+              id: userGroup.id
+            }
+          }
         }
       })
     } finally {

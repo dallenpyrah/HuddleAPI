@@ -8,10 +8,10 @@ export default class UserRepository implements IUserRepository {
 
   constructor (prismaClient: PrismaClient) {
     this.prismaClient = prismaClient
-    this.getUserIdByFireBaseId = this.getUserIdByFireBaseId.bind(this)
+    this.getUserByFireBaseId = this.getUserByFireBaseId.bind(this)
   }
 
-  async getUserIdByFireBaseId (fireBaseUserId: string): Promise<User | null | undefined> {
+  async getUserByFireBaseId (fireBaseUserId: string): Promise<User | null | undefined> {
     try {
       return await this.prismaClient.user.findUnique({
         where: {

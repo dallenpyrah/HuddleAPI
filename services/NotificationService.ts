@@ -16,7 +16,7 @@ export default class NotificationService {
 
   async getNotificationsByFireBaseUserId (fireBaseUserId: string): Promise<Notification[] | undefined> {
     try {
-      const user = await this.userRepository.getUserIdByFireBaseId(fireBaseUserId)
+      const user = await this.userRepository.getUserByFireBaseId(fireBaseUserId)
 
       if (user != null) {
         return await this.notificationRepository.getNotificationsByUserId(user.id)
