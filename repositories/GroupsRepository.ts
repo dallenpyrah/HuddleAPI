@@ -8,6 +8,7 @@ export default class GroupsRepository implements IGroupsRepository {
     this.prisma = prisma
     this.getNewestGroups = this.getNewestGroups.bind(this)
     this.createGroup = this.createGroup.bind(this)
+    this.getGroupById = this.getGroupById.bind(this)
   }
 
   async getNewestGroups (): Promise<Group[] | undefined> {
@@ -38,6 +39,21 @@ export default class GroupsRepository implements IGroupsRepository {
           },
           createdAt: new Date(),
           updatedAt: new Date()
+        },
+        include: {
+          created: true
+        }
+      })
+    } finally {
+      await this.prisma.$disconnect()
+    }
+  }
+
+  async getGroupById (groupId: number): Promise<Group | null> {
+    try {
+      return await this.prisma.group.findUnique({
+        where: {
+          id: groupId
         },
         include: {
           created: true

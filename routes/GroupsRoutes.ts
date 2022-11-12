@@ -29,5 +29,6 @@ export default class GroupsRoutes {
   createRoutes (): void {
     this.app.get(`${this.apiPath}/newest`, this.groupsController.getNewestGroups as RequestHandler)
     this.app.post(`${this.apiPath}`, this.groupsController.createGroup as RequestHandler)
+    this.app.get(`${this.apiPath}/:groupId`, this.groupsController.getGroupById as RequestHandler)
   }
 }
