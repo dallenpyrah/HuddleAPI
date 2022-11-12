@@ -56,7 +56,7 @@
     "iconv-lite": "^0.6.3",
     "inflight": "^1.0.6",
     "inherits": "^2.0.4",
-    "ipaddr.js": "^1.9.1",
+    "ipaddr.js": "^2.0.1",
     "is-core-module": "^2.10.0",
     "js-tokens": "^4.0.0",
     "js-yaml": "^4.1.0",
