@@ -1,5 +1,5 @@
 import IGroupsRepository from '../interfaces/IGroupsRepository'
-import { Group, User } from '@prisma/client'
+import { Group, Issue, User } from '@prisma/client'
 import IUserRepository from '../interfaces/IUserRepository'
 
 export default class GroupsService {
@@ -12,6 +12,7 @@ export default class GroupsService {
     this.getNewestGroups = this.getNewestGroups.bind(this)
     this.createGroup = this.createGroup.bind(this)
     this.getGroupById = this.getGroupById.bind(this)
+    this.getIssuesByGroupId = this.getIssuesByGroupId.bind(this)
   }
 
   async getNewestGroups (): Promise<Group[] | undefined> {
@@ -36,6 +37,16 @@ export default class GroupsService {
       return group
     } else {
       throw new Error('Group could not be found with the given id')
+    }
+  }
+
+  async getIssuesByGroupId (groupId: number): Promise<Issue[]> {
+    const issues = await this.groupsRepository.getIssuesByGroupId(groupId)
+
+    if (issues !== null) {
+      return issues
+    } else {
+      throw new Error('Issues could not be found with the given id')
     }
   }
 }

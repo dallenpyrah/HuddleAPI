@@ -15,6 +15,7 @@ export default class GroupsController {
     this.getNewestGroups = this.getNewestGroups.bind(this)
     this.createGroup = this.createGroup.bind(this)
     this.getGroupById = this.getGroupById.bind(this)
+    this.getIssuesByGroupId = this.getIssuesByGroupId.bind(this)
   }
 
   async getNewestGroups (req: Request, res: Response): Promise<void> {
@@ -42,6 +43,17 @@ export default class GroupsController {
       const groupId = parseInt(req.params.groupId)
       const group = await this.groupsService.getGroupById(groupId)
       res.send(group).status(200)
+    } catch (e) {
+      this.logger.error(e)
+      res.send(e).status(500)
+    }
+  }
+
+  async getIssuesByGroupId (req: Request, res: Response): Promise<void> {
+    try {
+      const groupId = parseInt(req.params.groupId)
+      const issues = await this.groupsService.getIssuesByGroupId(groupId)
+      res.send(issues).status(200)
     } catch (e) {
       this.logger.error(e)
       res.send(e).status(500)

@@ -1,4 +1,4 @@
-import { Group, PrismaClient } from '@prisma/client'
+import { Group, Issue, PrismaClient } from '@prisma/client'
 import IGroupsRepository from '../interfaces/IGroupsRepository'
 
 export default class GroupsRepository implements IGroupsRepository {
@@ -9,6 +9,7 @@ export default class GroupsRepository implements IGroupsRepository {
     this.getNewestGroups = this.getNewestGroups.bind(this)
     this.createGroup = this.createGroup.bind(this)
     this.getGroupById = this.getGroupById.bind(this)
+    this.getIssuesByGroupId = this.getIssuesByGroupId.bind(this)
   }
 
   async getNewestGroups (): Promise<Group[] | undefined> {
@@ -57,6 +58,21 @@ export default class GroupsRepository implements IGroupsRepository {
         },
         include: {
           created: true
+        }
+      })
+    } finally {
+      await this.prisma.$disconnect()
+    }
+  }
+
+  async getIssuesByGroupId (groupId: number): Promise<Issue[] | null> {
+    try {
+      return await this.prisma.issue.findMany({
+        where: {
+          groupId
+        },
+        include: {
+          user: true
         }
       })
     } finally {

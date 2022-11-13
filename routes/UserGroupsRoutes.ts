@@ -16,7 +16,7 @@ export default class UserGroupsRoutes {
 
   constructor (app: express.Application) {
     this.app = app
-    this.apiPath = '/api/usergroups'
+    this.apiPath = '/api/groups'
     this.prismaClient = new PrismaClient()
     this.userGroupsRepository = new UserGroupsRepository(this.prismaClient)
     this.userRepository = new UserRepository(this.prismaClient)
@@ -26,7 +26,8 @@ export default class UserGroupsRoutes {
   }
 
   createRoutes (): void {
-    this.app.get(`${this.apiPath}/:userFireBaseId`, this.userGroupsController.getUserGroupsByFireBaseId as RequestHandler)
-    this.app.post(`${this.apiPath}`, this.userGroupsController.createUserGroup as RequestHandler)
+    this.app.get('/api/users/:userFireBaseId/groups', this.userGroupsController.getUserGroupsByFireBaseId as RequestHandler)
+    this.app.post('/api/groups/:groupId/users/:userId', this.userGroupsController.addUserToGroup as RequestHandler)
+    this.app.get('/api/groups/:groupId/users', this.userGroupsController.getUsersByGroupId as RequestHandler)
   }
 }

@@ -10,7 +10,8 @@ export default class UserGroupsService {
     this.userGroupsRepository = userGroupsRepository
     this.userRepository = userRepository
     this.getUserGroupsByFireBaseId = this.getUserGroupsByFireBaseId.bind(this)
-    this.createUserGroup = this.createUserGroup.bind(this)
+    this.addUserToGroup = this.addUserToGroup.bind(this)
+    this.getUsersByGroupId = this.getUsersByGroupId.bind(this)
   }
 
   async getUserGroupsByFireBaseId (fireBaseUserId: string): Promise<UserGroups[]> {
@@ -23,7 +24,11 @@ export default class UserGroupsService {
     }
   }
 
-  async createUserGroup (userGroup: any): Promise<UserGroups> {
-    return await this.userGroupsRepository.createUserGroup(userGroup)
+  async addUserToGroup (groupId: number, userId: number): Promise<UserGroups> {
+    return await this.userGroupsRepository.addUserToGroup(groupId, userId)
+  }
+
+  async getUsersByGroupId (groupId: number): Promise<UserGroups[]> {
+    return await this.userGroupsRepository.getUsersByGroupId(groupId)
   }
 }

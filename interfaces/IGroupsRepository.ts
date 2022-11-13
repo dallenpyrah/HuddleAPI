@@ -1,8 +1,8 @@
-import { Group } from '@prisma/client'
+import { Group, Issue } from '@prisma/client'
 
 export default interface IGroupsRepository {
   getNewestGroups: () => Promise<Group[] | undefined>
   createGroup: (groupToCreate: any) => Promise<Group>
   getGroupById: (groupId: number) => Promise<Group | null>
-
+  getIssuesByGroupId: (groupId: number) => Promise<Issue[] | null>
 }
