@@ -4,6 +4,7 @@ import UserGroupsService from '../services/UserGroupsService'
 import UserGroupsRepository from '../repositories/UserGroupsRepository'
 import { PrismaClient } from '@prisma/client'
 import UserRepository from '../repositories/UserRepository'
+import pino from 'pino'
 
 export default class UserGroupsRoutes {
   private readonly app: express.Application
@@ -13,6 +14,7 @@ export default class UserGroupsRoutes {
   private readonly userGroupsRepository: UserGroupsRepository
   private readonly prismaClient: PrismaClient
   private readonly userRepository: UserRepository
+  private readonly logger: pino.Logger
 
   constructor (app: express.Application) {
     this.app = app
@@ -21,7 +23,13 @@ export default class UserGroupsRoutes {
     this.userGroupsRepository = new UserGroupsRepository(this.prismaClient)
     this.userRepository = new UserRepository(this.prismaClient)
     this.userGroupsService = new UserGroupsService(this.userGroupsRepository, this.userRepository)
-    this.userGroupsController = new UserGroupsController(this.userGroupsService)
+    this.logger = pino({
+      transport: {
+        target: 'pino-pretty',
+        options: { colorize: true }
+      }
+    })
+    this.userGroupsController = new UserGroupsController(this.userGroupsService, this.logger)
     this.createRoutes = this.createRoutes.bind(this)
   }
 

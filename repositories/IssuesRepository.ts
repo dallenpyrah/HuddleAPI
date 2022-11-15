@@ -1,6 +1,5 @@
 import { Issue, PrismaClient } from '@prisma/client'
 import IIssue from '../interfaces/IIssue'
-import pino from 'pino'
 
 export default class IssuesRepository implements IIssue {
   private readonly prismaClient: PrismaClient
@@ -41,8 +40,6 @@ export default class IssuesRepository implements IIssue {
           group: true
         }
       })
-    } catch (error) {
-      pino().error(error)
     } finally {
       await this.prismaClient.$disconnect()
     }
@@ -61,8 +58,6 @@ export default class IssuesRepository implements IIssue {
           group: true
         }
       })
-    } catch (error) {
-      pino().error(error)
     } finally {
       await this.prismaClient.$disconnect()
     }

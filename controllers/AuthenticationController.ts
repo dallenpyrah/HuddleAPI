@@ -5,14 +5,11 @@ import { User } from '@firebase/auth'
 
 export default class AuthenticationController {
   private readonly authenticationService: AuthenticationService
-  private readonly logger = pino({
-    transport: {
-      target: 'pino-pretty'
-    }
-  })
+  private readonly logger: pino.Logger
 
-  constructor (authenticationService: AuthenticationService) {
+  constructor (authenticationService: AuthenticationService, logger: pino.Logger) {
     this.authenticationService = authenticationService
+    this.logger = logger
     this.signup = this.signup.bind(this)
   }
 

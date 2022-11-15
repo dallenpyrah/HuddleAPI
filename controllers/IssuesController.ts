@@ -4,14 +4,11 @@ import pino from 'pino'
 
 export default class IssuesController {
   private readonly issuesService: IssuesService
-  private readonly logger = pino({
-    transport: {
-      target: 'pino-pretty'
-    }
-  })
+  private readonly logger: pino.Logger
 
-  constructor (issuesService: IssuesService) {
+  constructor (issuesService: IssuesService, logger: pino.Logger) {
     this.issuesService = issuesService
+    this.logger = logger
     this.getIssuesByFireBaseId = this.getIssuesByFireBaseId.bind(this)
     this.getCommunityIssues = this.getCommunityIssues.bind(this)
     this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)

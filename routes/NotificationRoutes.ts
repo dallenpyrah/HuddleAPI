@@ -21,11 +21,16 @@ export default class NotificationRoutes {
     this.app = app
     this.apiPath = '/api/notifications'
     this.prismaClient = new PrismaClient()
-    this.logger = pino()
+    this.logger = pino({
+      transport: {
+        target: 'pino-pretty',
+        options: { colorize: true }
+      }
+    })
     this.userRepository = new UserRepository(this.prismaClient)
-    this.notificationRepository = new NotificationRepository(this.prismaClient, this.logger)
-    this.notificationService = new NotificationService(this.notificationRepository, this.userRepository, this.logger)
-    this.notificationController = new NotificationController(this.notificationService)
+    this.notificationRepository = new NotificationRepository(this.prismaClient)
+    this.notificationService = new NotificationService(this.notificationRepository, this.userRepository)
+    this.notificationController = new NotificationController(this.notificationService, this.logger)
     this.createRoutes = this.createRoutes.bind(this)
   }
 

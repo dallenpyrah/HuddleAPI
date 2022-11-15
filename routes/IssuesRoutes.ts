@@ -4,6 +4,7 @@ import IssuesController from '../controllers/IssuesController'
 import { PrismaClient } from '@prisma/client'
 import { Application, RequestHandler } from 'express'
 import UserRepository from '../repositories/UserRepository'
+import pino from 'pino'
 
 export default class IssuesRoutes {
   private readonly app: Application
@@ -13,6 +14,7 @@ export default class IssuesRoutes {
   private readonly issuesRepository: IssuesRepository
   private readonly prismaClient: PrismaClient
   private readonly userRepository: UserRepository
+  private readonly logger: pino.Logger
 
   constructor (app: Application) {
     this.app = app
@@ -21,7 +23,13 @@ export default class IssuesRoutes {
     this.issuesRepository = new IssuesRepository(this.prismaClient)
     this.userRepository = new UserRepository(this.prismaClient)
     this.issuesService = new IssuesService(this.issuesRepository, this.userRepository)
-    this.issuesController = new IssuesController(this.issuesService)
+    this.logger = pino({
+      transport: {
+        target: 'pino-pretty',
+        options: { colorize: true }
+      }
+    })
+    this.issuesController = new IssuesController(this.issuesService, this.logger)
     this.createRoutes = this.createRoutes.bind(this)
   }
 

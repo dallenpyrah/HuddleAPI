@@ -19,8 +19,6 @@ export default class AuthenticationRepository implements IAuthentication {
           fireBaseUserId: user.uid
         }
       })
-    } catch (error) {
-      throw new Error(error)
     } finally {
       await this.prisma.$disconnect()
     }
@@ -33,8 +31,6 @@ export default class AuthenticationRepository implements IAuthentication {
           fireBaseUserId: user.uid
         }
       })
-    } catch (error) {
-      throw new Error(error)
     } finally {
       await this.prisma.$disconnect()
     }

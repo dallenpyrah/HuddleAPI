@@ -4,14 +4,11 @@ import { Request, Response } from 'express'
 
 export default class GroupsController {
   private readonly groupsService: GroupsService
-  private readonly logger = pino({
-    transport: {
-      target: 'pino-pretty'
-    }
-  })
+  private readonly logger: pino.Logger
 
-  constructor (groupsService: GroupsService) {
+  constructor (groupsService: GroupsService, logger: pino.Logger) {
     this.groupsService = groupsService
+    this.logger = logger
     this.getNewestGroups = this.getNewestGroups.bind(this)
     this.createGroup = this.createGroup.bind(this)
     this.getGroupById = this.getGroupById.bind(this)
@@ -30,6 +27,7 @@ export default class GroupsController {
 
   async createGroup (req: Request, res: Response): Promise<void> {
     try {
+      req.body.groupId = req.params.groupId
       const group = await this.groupsService.createGroup(req.body)
       res.send(group).status(200)
     } catch (e) {

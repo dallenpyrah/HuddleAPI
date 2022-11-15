@@ -4,14 +4,11 @@ import pino from 'pino'
 
 export default class UserGroupsController {
   private readonly userGroupsService: UserGroupsService
-  private readonly logger = pino({
-    transport: {
-      target: 'pino-pretty'
-    }
-  })
+  private readonly logger: pino.Logger
 
-  constructor (userGroupsService: UserGroupsService) {
+  constructor (userGroupsService: UserGroupsService, logger: pino.Logger) {
     this.userGroupsService = userGroupsService
+    this.logger = logger
     this.getUserGroupsByFireBaseId = this.getUserGroupsByFireBaseId.bind(this)
     this.addUserToGroup = this.addUserToGroup.bind(this)
     this.getUsersByGroupId = this.getUsersByGroupId.bind(this)
