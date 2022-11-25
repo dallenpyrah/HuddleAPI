@@ -1,7 +1,6 @@
 import {User} from "@prisma/client";
 
-
-export default interface IGroupContract {
+export default interface GroupContract {
     id: number
     name: string
     description: string

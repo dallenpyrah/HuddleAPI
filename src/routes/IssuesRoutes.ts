@@ -1,8 +1,8 @@
 import IssuesRepository from '../repositories/IssuesRepository'
 import IssuesService from '../services/IssuesService'
 import IssuesController from '../controllers/IssuesController'
-import { PrismaClient } from '@prisma/client'
-import { Application, RequestHandler } from 'express'
+import {PrismaClient} from '@prisma/client'
+import {Application, RequestHandler} from 'express'
 import UserRepository from '../repositories/UserRepository'
 import pino from 'pino'
 
@@ -16,7 +16,7 @@ export default class IssuesRoutes {
   private readonly userRepository: UserRepository
   private readonly logger: pino.Logger
 
-  constructor (app: Application) {
+  constructor(app: Application) {
     this.app = app
     this.apiPath = '/api/issues'
     this.prismaClient = new PrismaClient()
@@ -26,14 +26,14 @@ export default class IssuesRoutes {
     this.logger = pino({
       transport: {
         target: 'pino-pretty',
-        options: { colorize: true }
+        options: {colorize: true}
       }
     })
     this.issuesController = new IssuesController(this.issuesService, this.logger)
     this.createRoutes = this.createRoutes.bind(this)
   }
 
-  createRoutes (): void {
+  createRoutes(): void {
     this.app.get(`${this.apiPath}/:userId`, this.issuesController.getIssuesByFireBaseId as RequestHandler)
     this.app.get(`${this.apiPath}/:limit/:afterId`, this.issuesController.getCommunityIssues as RequestHandler)
     this.app.get(`${this.apiPath}/:filter`, this.issuesController.getFilteredCommunityIssues as RequestHandler)

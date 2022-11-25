@@ -112,7 +112,8 @@
     "wrappy": "^1.0.2"
   },
   "scripts": {
-    "build": "npx tsc",
+    "lint": "eslint .",
+    "build": "npm run lint && npx tsc",
     "prestart": "npm run build",
     "start": "node build/index.js"
   },
