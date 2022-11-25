@@ -113,7 +113,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "build": "npm run lint && npx tsc",
+    "build": "npx prisma generate --schema=./src/prisma/schema.prisma && npm run lint && npx tsc",
     "prestart": "npm run build",
     "start": "node build/index.js"
   },
