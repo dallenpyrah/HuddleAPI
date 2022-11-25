@@ -1,11 +1,10 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-west-1:591941351292:task-definition/huddle-api-task-definition:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-1:591941351292:task-definition/huddle-api-task-definition:2",
     "containerDefinitions": [
         {
-            "name": "huddle-api",
-            "image": "591941351292.dkr.ecr.us-west-1.amazonaws.com/huddle-api",
+            "name": "huddle-apie",
+            "image": "591941351292.dkr.ecr.us-west-1.amazonaws.com/huddle-api:58f1cb537dd60d01fba92c17aeae1699ab01c38b",
             "cpu": 0,
-            "links": [],
             "portMappings": [
                 {
                     "containerPort": 80,
@@ -14,27 +13,16 @@
                 }
             ],
             "essential": true,
-            "entryPoint": [],
-            "command": [],
             "environment": [],
-            "environmentFiles": [],
             "mountPoints": [],
-            "volumesFrom": [],
-            "secrets": [],
-            "dnsServers": [],
-            "dnsSearchDomains": [],
-            "extraHosts": [],
-            "dockerSecurityOptions": [],
-            "dockerLabels": {},
-            "ulimits": [],
-            "systemControls": []
+            "volumesFrom": []
         }
     ],
     "family": "huddle-api-task-definition",
     "taskRoleArn": "arn:aws:iam::591941351292:role/ecsTaskExecutionRole",
     "executionRoleArn": "arn:aws:iam::591941351292:role/ecsTaskExecutionRole",
     "networkMode": "bridge",
-    "revision": 1,
+    "revision": 2,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -42,16 +30,10 @@
             "name": "com.amazonaws.ecs.capability.ecr-auth"
         },
         {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.17"
-        },
-        {
             "name": "com.amazonaws.ecs.capability.task-iam-role"
         },
         {
             "name": "ecs.capability.execution-role-ecr-pull"
-        },
-        {
-            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
         }
     ],
     "placementConstraints": [],
@@ -68,8 +50,8 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2022-11-25T18:46:29.291Z",
-    "registeredBy": "arn:aws:iam::591941351292:root",
+    "registeredAt": "2022-11-25T18:55:59.233Z",
+    "registeredBy": "arn:aws:iam::591941351292:user/huddle-api-user",
     "tags": [
         {
             "key": "ecs:taskDefinition:createdFrom",
