@@ -18,5 +18,5 @@ COPY . .
 
 RUN npx prisma generate --schema=./src/prisma/schema.prisma
 
-EXPOSE 8001
+EXPOSE 80
 CMD [ "npm", "run", "pm2" ]
