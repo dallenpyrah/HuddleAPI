@@ -1,5 +1,6 @@
 import { Group, Issue, PrismaClient } from '@prisma/client'
 import IGroupsRepository from '../interfaces/IGroupsRepository'
+import IGroupContract from "../contracts/IGroupContract";
 
 export default class GroupsRepository implements IGroupsRepository {
   private readonly prisma: PrismaClient
@@ -26,7 +27,7 @@ export default class GroupsRepository implements IGroupsRepository {
     }
   }
 
-  async createGroup (groupToCreate: any): Promise<Group> {
+  async createGroup (groupToCreate: IGroupContract): Promise<Group> {
     try {
       return await this.prisma.group.create({
         data: {

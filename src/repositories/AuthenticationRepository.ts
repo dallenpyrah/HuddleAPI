@@ -1,4 +1,4 @@
-import { PrismaClient, User } from '@prisma/client'
+import {PrismaClient, User} from '@prisma/client'
 import IAuthentication from '../interfaces/IAuthentication'
 import { User as FireBaseUser } from '@firebase/auth'
 
@@ -19,6 +19,8 @@ export default class AuthenticationRepository implements IAuthentication {
           fireBaseUserId: user.uid
         }
       })
+    } catch (e) {
+      throw e
     } finally {
       await this.prisma.$disconnect()
     }
@@ -31,6 +33,8 @@ export default class AuthenticationRepository implements IAuthentication {
           fireBaseUserId: user.uid
         }
       })
+    } catch (e) {
+      throw e
     } finally {
       await this.prisma.$disconnect()
     }

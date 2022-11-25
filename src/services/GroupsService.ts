@@ -1,6 +1,7 @@
 import IGroupsRepository from '../interfaces/IGroupsRepository'
 import { Group, Issue, User } from '@prisma/client'
 import IUserRepository from '../interfaces/IUserRepository'
+import IGroupContract from "../contracts/IGroupContract";
 
 export default class GroupsService {
   private readonly groupsRepository: IGroupsRepository
@@ -19,7 +20,7 @@ export default class GroupsService {
     return await this.groupsRepository.getNewestGroups()
   }
 
-  async createGroup (groupToCreate: any): Promise<Group> {
+  async createGroup (groupToCreate: IGroupContract): Promise<Group> {
     const user = await this.userRepository.getUserByFireBaseId(groupToCreate.fireBaseUserId)
 
     if (user !== undefined) {

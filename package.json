@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "type": "commonjs",
   "dependencies": {
-    "@prisma/client": "^4.3.1",
+    "@prisma/client": "^4.6.1",
+    "@types/node": "^14.0.4",
     "@types/pino": "^7.0.5",
     "@types/pino-http": "^5.8.1",
     "@types/sinon": "^10.0.13",
@@ -72,6 +73,7 @@
     "ms": "^2.0.0",
     "mysql": "^2.18.1",
     "negotiator": "^0.6.3",
+    "npx": "^10.2.2",
     "object-inspect": "^1.12.2",
     "on-finished": "^2.4.1",
     "once": "^1.4.0",
@@ -110,12 +112,9 @@
     "wrappy": "^1.0.2"
   },
   "scripts": {
-    "prebuild": "eslint . --ext .ts",
-    "build": "tsc",
+    "build": "npx tsc",
     "prestart": "npm run build",
-    "start": "node .",
-    "test": "env TS_NODE_COMPILER_OPTIONS='{\"module\": \"commonjs\" }' mocha -r ts-node/register 'tests/**/*.ts'",
-    "pm2": "pm2 start ecosystem.config.js"
+    "start": "node build/index.js"
   },
   "keywords": [],
   "author": "",
@@ -128,7 +127,7 @@
     "@types/mocha": "^10.0.0",
     "@types/mysql": "^2.15.21",
     "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.36.1",
+    "@typescript-eslint/parser": "^5.44.0",
     "chai": "^4.3.6",
     "eslint": "^8.28.0",
     "eslint-config-airbnb": "^19.0.4",
@@ -140,6 +139,7 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "mocha": "^10.0.0",
+    "npxd": "^1.4.1",
     "prisma": "^4.4.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3",
