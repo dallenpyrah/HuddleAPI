@@ -2,7 +2,7 @@
     "taskDefinitionArn": "arn:aws:ecs:us-west-1:591941351292:task-definition/huddle-api-task-definition:1",
     "containerDefinitions": [
         {
-            "name": "huddle-apie",
+            "name": "huddle-api",
             "image": "591941351292.dkr.ecr.us-west-1.amazonaws.com/huddle-api",
             "cpu": 0,
             "links": [],
