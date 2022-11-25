@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:us-west-1:591941351292:task-definition/huddle-api:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-west-1:591941351292:task-definition/huddle-api-fargate:1",
     "containerDefinitions": [
         {
             "name": "huddle-container",
@@ -9,7 +9,7 @@
             "portMappings": [
                 {
                     "containerPort": 80,
-                    "hostPort": 0,
+                    "hostPort": 80,
                     "protocol": "tcp"
                 }
             ],
@@ -30,9 +30,9 @@
             "systemControls": []
         }
     ],
-    "family": "huddle-api",
+    "family": "huddle-api-fargate",
     "executionRoleArn": "arn:aws:iam::591941351292:role/ecsTaskExecutionRole",
-    "networkMode": "bridge",
+    "networkMode": "awsvpc",
     "revision": 1,
     "volumes": [],
     "status": "ACTIVE",
@@ -48,15 +48,18 @@
         },
         {
             "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
         }
     ],
     "placementConstraints": [],
     "compatibilities": [
-        "EXTERNAL",
-        "EC2"
+        "EC2",
+        "FARGATE"
     ],
     "requiresCompatibilities": [
-        "EC2"
+        "FARGATE"
     ],
     "cpu": "1024",
     "memory": "3072",
@@ -64,7 +67,7 @@
         "cpuArchitecture": "X86_64",
         "operatingSystemFamily": "LINUX"
     },
-    "registeredAt": "2022-11-25T19:14:32.422Z",
+    "registeredAt": "2022-11-25T19:27:21.660Z",
     "registeredBy": "arn:aws:iam::591941351292:root",
     "tags": [
         {
@@ -73,7 +76,7 @@
         },
         {
             "key": "ecs:taskDefinition:stackId",
-            "value": "arn:aws:cloudformation:us-west-1:591941351292:stack/ECS-Console-V2-TaskDefinition-d64d4d44-52db-46ca-b3d4-ac1705bc7a93/61d46450-6cf5-11ed-9d75-0290fb835b2f"
+            "value": "arn:aws:cloudformation:us-west-1:591941351292:stack/ECS-Console-V2-TaskDefinition-31ca0285-d81d-4682-b02e-357fafec95f6/2c2afc90-6cf7-11ed-b378-029558dd83bd"
         }
     ]
 }
