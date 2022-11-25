@@ -33,7 +33,7 @@ app.get('/', (req, res) => {
     res.send('API is running')
 })
 
-app.listen(80, () => {
+app.listen(8001, () => {
     // eslint-disable-next-line no-undef
     console.log('Server started again on port 8001 - http://localhost:8001')
 })
