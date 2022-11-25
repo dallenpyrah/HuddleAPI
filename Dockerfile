@@ -2,6 +2,8 @@ FROM node:16-slim
 RUN apt-get update
 RUN apt-get install -y openssl
 
+RUN mkdir -p /app
+
 # Create app directory
 WORKDIR /app
 
@@ -17,5 +19,4 @@ COPY . .
 RUN npx prisma generate --schema=./src/prisma/schema.prisma
 
 EXPOSE 8001
-
-CMD [ "npm", "run", "start" ]
+CMD [ "npm", "run", "pm2" ]

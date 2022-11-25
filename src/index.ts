@@ -30,7 +30,7 @@ notificationRoutes.createRoutes()
 groupRoutes.createRoutes()
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.send('API is running')
 })
 
 app.listen(8001, () => {
