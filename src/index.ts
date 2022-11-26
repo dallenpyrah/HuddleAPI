@@ -37,5 +37,3 @@ app.listen(8001, () => {
     // eslint-disable-next-line no-undef
     console.log('Server started again on port 8001 - http://localhost:8001')
 })
-
-module.exports = app
