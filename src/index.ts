@@ -45,6 +45,6 @@ https
     )
     .listen(8001, function () {
         console.log(
-            "Example app listening on port 8001! Go to https://localhost:8001/"
+            "Listening on port 8001! Go to https://localhost:8001/"
         );
     });
