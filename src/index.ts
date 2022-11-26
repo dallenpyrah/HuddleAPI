@@ -5,6 +5,8 @@ import IssuesRoutes from './routes/IssuesRoutes'
 import bodyParser from 'body-parser'
 import NotificationRoutes from './routes/NotificationRoutes'
 import GroupsRoutes from './routes/GroupsRoutes'
+import * as https from "https";
+import * as fs from "fs";
 
 const app = express()
 const jsonParser = bodyParser.json()
@@ -33,7 +35,16 @@ app.get('/', (req, res) => {
     res.send('API is running')
 })
 
-app.listen(8001, () => {
-    // eslint-disable-next-line no-undef
-    console.log('Server started again on port 8001 - http://localhost:8001')
-})
+https
+    .createServer(
+        {
+            key: fs.readFileSync("server.key"),
+            cert: fs.readFileSync("server.cert"),
+        },
+        app
+    )
+    .listen(8001, function () {
+        console.log(
+            "Example app listening on port 8001! Go to https://localhost:8001/"
+        );
+    });
