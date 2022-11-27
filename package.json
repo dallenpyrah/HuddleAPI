@@ -115,8 +115,11 @@
   "scripts": {
     "lint": "eslint .",
     "build": "npx prisma generate --schema=./src/prisma/schema.prisma && npm run lint && npx tsc",
+    "build:prod": "npx prisma generate --schema=./src/prisma/schema.prisma",
     "prestart": "npm run build",
+    "prestart:prod": "npm run build:prod",
     "start": "node build/index.js",
+    "start:prod": "pm2 start build/index.js --name=huddle-api -i max",
     "pm2": "pm2 start build/index.js -i max"
   },
   "keywords": [],
