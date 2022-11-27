@@ -1,2 +1,2 @@
 cd ~/aws-codedeploy
-npm run start:prod
+npm run pm2
