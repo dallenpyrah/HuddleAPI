@@ -119,7 +119,7 @@
     "prestart": "npm run build",
     "prestart:prod": "npm run build:prod",
     "start": "node build/index.js",
-    "start:prod": "pm2 start build/index.js --name=huddle-api -i max",
+    "start:prod": "node build/index.js",
     "pm2": "pm2 start build/index.js -i max"
   },
   "keywords": [],
