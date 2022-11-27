@@ -1,2 +1,2 @@
 cd ~/aws-codedeploy
-npm run pm2
+pm2 start build/index.js -i max
