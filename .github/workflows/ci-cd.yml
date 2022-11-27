@@ -68,13 +68,13 @@ jobs:
         run: npm install
       - name: Inject Env Variables
         run: |
-          - touch .env
-          - echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-          - echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          - echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          - echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          - echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-          - cat .env
+          touch .env
+          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
+          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          cat .env
       - name: Run build
         run: npm run build
 
