@@ -95,13 +95,6 @@ jobs:
       # Deploy push to AWS S3
       - name: AWS Deploy push
         run: |
-          touch .env
-          echo "DATABASE_URL=${{ secrets.DATABASE_URL }}" >> .env
-          echo "DB_HOST=${{ secrets.DB_HOST }}" >> .env
-          echo "DB_USER=${{ secrets.DB_USER }}" >> .env
-          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
-          echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
-          cat .env
           aws deploy push \
           --application-name ${{ matrix.appname }} \
           --description "This is a revision for the ${{ matrix.appname }}-${{ github.sha }}" \
