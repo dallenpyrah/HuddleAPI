@@ -85,6 +85,7 @@
     "pino-http": "^8.2.1",
     "pino-pretty": "^9.1.1",
     "pm2": "^5.2.2",
+    "prisma": "^4.6.1",
     "proxy-addr": "^2.0.7",
     "qs": "^6.10.3",
     "range-parser": "^1.2.1",
@@ -142,7 +143,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "mocha": "^10.0.0",
     "npxd": "^1.4.1",
-    "prisma": "^4.4.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.9.3",
     "webpack-cli": "^4.10.0"
