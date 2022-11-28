@@ -43,6 +43,7 @@
     "finalhandler": "^1.2.0",
     "firebase": "^9.9.3",
     "firebase-admin": "^11.0.1",
+    "forever": "^4.0.3",
     "forwarded": "^0.2.0",
     "fresh": "^0.5.2",
     "fs.realpath": "^1.0.0",
