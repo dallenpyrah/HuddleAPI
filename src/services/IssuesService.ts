@@ -1,6 +1,7 @@
 import IIssueRepo from '../interfaces/IIssueRepository'
 import {Issue} from '@prisma/client'
 import IUserRepository from '../interfaces/IUserRepository'
+import IssueContract from "../contracts/IssueContract";
 
 export default class IssuesService {
     private readonly issuesRepository: IIssueRepo
@@ -12,6 +13,7 @@ export default class IssuesService {
         this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
         this.getCommunityIssues = this.getCommunityIssues.bind(this)
         this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
+        this.createIssue = this.createIssue.bind(this)
     }
 
     async getIssuesByUserId(userId: number): Promise<Issue[]> {
@@ -40,5 +42,9 @@ export default class IssuesService {
         } else {
             return []
         }
+    }
+
+    async createIssue(issue: IssueContract): Promise<Issue> {
+        return await this.issuesRepository.createIssue(issue)
     }
 }
