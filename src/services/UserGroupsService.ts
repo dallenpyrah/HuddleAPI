@@ -9,16 +9,14 @@ export default class UserGroupsService {
     constructor(userGroupsRepository: UserGroupsRepository, userRepository: IUserRepository) {
         this.userGroupsRepository = userGroupsRepository
         this.userRepository = userRepository
-        this.getUserGroupsByFireBaseId = this.getUserGroupsByFireBaseId.bind(this)
+        this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
         this.addUserToGroup = this.addUserToGroup.bind(this)
         this.getUsersByGroupId = this.getUsersByGroupId.bind(this)
     }
 
-    async getUserGroupsByFireBaseId(fireBaseUserId: string): Promise<UserGroups[]> {
-        const user = await this.userRepository.getUserByFireBaseId(fireBaseUserId)
-
-        if (user != null) {
-            return await this.userGroupsRepository.getUserGroupsByUserId(user.id)
+    async getUserGroupsByUserId(userId: number): Promise<UserGroups[]> {
+        if (userId > 0) {
+            return await this.userGroupsRepository.getUserGroupsByUserId(userId)
         } else {
             return []
         }

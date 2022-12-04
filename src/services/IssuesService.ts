@@ -9,16 +9,14 @@ export default class IssuesService {
     constructor(issuesRepository: IIssueRepo, userRepository: IUserRepository) {
         this.issuesRepository = issuesRepository
         this.userRepository = userRepository
-        this.getIssuesByFireBaseId = this.getIssuesByFireBaseId.bind(this)
+        this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
         this.getCommunityIssues = this.getCommunityIssues.bind(this)
         this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
     }
 
-    async getIssuesByFireBaseId(fireBaseUserId: string): Promise<Issue[]> {
-        const user = await this.userRepository.getUserByFireBaseId(fireBaseUserId)
-
-        if (user != null) {
-            return await this.issuesRepository.getIssuesByUserId(user.id)
+    async getIssuesByUserId(userId: number): Promise<Issue[]> {
+        if (userId > 0) {
+            return await this.issuesRepository.getIssuesByUserId(userId)
         } else {
             return []
         }

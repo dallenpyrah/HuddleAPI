@@ -10,13 +10,13 @@ export default class NotificationController {
         this.notificationService = notificationService
         this.logger = logger
 
-        this.getNotificationsByFireBaseUserId = this.getNotificationsByFireBaseUserId.bind(this)
+        this.getNotificationsByUserId = this.getNotificationsByUserId.bind(this)
     }
 
-    async getNotificationsByFireBaseUserId(req: Request, res: Response): Promise<Response> {
+    async getNotificationsByUserId(req: Request, res: Response): Promise<Response> {
         try {
-            const fireBaseUserId = req.params.userFireBaseId
-            const notifications = await this.notificationService.getNotificationsByFireBaseUserId(fireBaseUserId)
+            const userId = parseInt(req.params.userId)
+            const notifications = await this.notificationService.getNotificationsByUserId(userId)
             return res.status(200).send(notifications)
         } catch (error) {
             this.logger.error(error)

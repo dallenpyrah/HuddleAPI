@@ -9,14 +9,15 @@ export default class UserGroupsController {
     constructor(userGroupsService: UserGroupsService, logger: pino.Logger) {
         this.userGroupsService = userGroupsService
         this.logger = logger
-        this.getUserGroupsByFireBaseId = this.getUserGroupsByFireBaseId.bind(this)
+        this.getUserGroupsByUserId = this.getUserGroupsByUserId.bind(this)
         this.addUserToGroup = this.addUserToGroup.bind(this)
         this.getUsersByGroupId = this.getUsersByGroupId.bind(this)
     }
 
-    async getUserGroupsByFireBaseId(req: Request, res: Response): Promise<void> {
+    async getUserGroupsByUserId(req: Request, res: Response): Promise<void> {
         try {
-            const groups = await this.userGroupsService.getUserGroupsByFireBaseId(req.params.userFireBaseId)
+            const userId = parseInt(req.params.userId)
+            const groups = await this.userGroupsService.getUserGroupsByUserId(userId)
             res.status(200).send(groups)
         } catch (error) {
             this.logger.error(error)

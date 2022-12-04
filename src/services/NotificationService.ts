@@ -9,13 +9,12 @@ export default class NotificationService {
     constructor(notificationRepository: INotificationRepository, userRepository: IUserRepository) {
         this.notificationRepository = notificationRepository
         this.userRepository = userRepository
+        this.getNotificationsByUserId = this.getNotificationsByUserId.bind(this)
     }
 
-    async getNotificationsByFireBaseUserId(fireBaseUserId: string): Promise<Notification[] | undefined> {
-        const user = await this.userRepository.getUserByFireBaseId(fireBaseUserId)
-
-        if (user != null) {
-            return await this.notificationRepository.getNotificationsByUserId(user.id)
+    async getNotificationsByUserId(userId: number): Promise<Notification[] | undefined> {
+        if (userId > 0) {
+            return await this.notificationRepository.getNotificationsByUserId(userId)
         } else {
             return []
         }

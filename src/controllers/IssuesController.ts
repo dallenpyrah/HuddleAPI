@@ -9,15 +9,15 @@ export default class IssuesController {
     constructor(issuesService: IssuesService, logger: pino.Logger) {
         this.issuesService = issuesService
         this.logger = logger
-        this.getIssuesByFireBaseId = this.getIssuesByFireBaseId.bind(this)
+        this.getIssuesByUserId = this.getIssuesByUserId.bind(this)
         this.getCommunityIssues = this.getCommunityIssues.bind(this)
         this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
     }
 
-    async getIssuesByFireBaseId(req: Request, res: Response): Promise<void> {
+    async getIssuesByUserId(req: Request, res: Response): Promise<void> {
         try {
-            const fireBaseId = req.params.userId
-            const issues = await this.issuesService.getIssuesByFireBaseId(fireBaseId)
+            const userId = parseInt(req.params.userId)
+            const issues = await this.issuesService.getIssuesByUserId(userId)
             res.status(200).send(issues)
         } catch (error) {
             this.logger.error(error)

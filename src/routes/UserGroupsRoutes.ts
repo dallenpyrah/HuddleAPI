@@ -34,7 +34,7 @@ export default class UserGroupsRoutes {
     }
 
     createRoutes(): void {
-        this.app.get('/api/users/:userFireBaseId/groups', this.userGroupsController.getUserGroupsByFireBaseId as RequestHandler)
+        this.app.get('/api/users/:userId/groups', this.userGroupsController.getUserGroupsByUserId as RequestHandler)
         this.app.post('/api/groups/:groupId/users/:userId', this.userGroupsController.addUserToGroup as RequestHandler)
         this.app.get('/api/groups/:groupId/users', this.userGroupsController.getUsersByGroupId as RequestHandler)
     }
