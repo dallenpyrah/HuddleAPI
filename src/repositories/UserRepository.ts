@@ -10,14 +10,10 @@ export default class UserRepository implements IUserRepository {
     }
 
     async getUserByFireBaseId(fireBaseUserId: string): Promise<User | null | undefined> {
-        try {
-            return await this.prismaClient.user.findFirst({
-                where: {
-                    fireBaseUserId
-                }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+        return await this.prismaClient.user.findFirst({
+            where: {
+                fireBaseUserId
+            }
+        })
     }
 }

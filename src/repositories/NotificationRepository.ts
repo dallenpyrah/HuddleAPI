@@ -10,14 +10,10 @@ export default class NotificationRepository implements INotificationRepository {
     }
 
     async getNotificationsByUserId(userId: number): Promise<Notification[] | undefined> {
-        try {
-            return await this.prismaClient.notification.findMany({
-                where: {
-                    userId
-                }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+        return await this.prismaClient.notification.findMany({
+            where: {
+                userId
+            }
+        })
     }
 }

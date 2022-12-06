@@ -11,28 +11,20 @@ export default class AuthenticationRepository implements IAuthentication {
     }
 
     async signup(user: FireBaseUser): Promise<User> {
-        try {
-            return await this.prisma.user.create({
-                data: {
-                    email: user.email ?? '',
-                    name: user.displayName,
-                    fireBaseUserId: user.uid
-                }
-            })
-        } finally {
-            await this.prisma.$disconnect()
-        }
+        return await this.prisma.user.create({
+            data: {
+                email: user.email ?? '',
+                name: user.displayName,
+                fireBaseUserId: user.uid
+            }
+        })
     }
 
     async getUser(user: FireBaseUser): Promise<User | null> {
-        try {
-            return await this.prisma.user.findUnique({
-                where: {
-                    fireBaseUserId: user.uid
-                }
-            })
-        } finally {
-            await this.prisma.$disconnect()
-        }
+        return await this.prisma.user.findUnique({
+            where: {
+                fireBaseUserId: user.uid
+            }
+        })
     }
 }

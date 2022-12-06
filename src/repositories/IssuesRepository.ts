@@ -14,84 +14,68 @@ export default class IssuesRepository implements IIssueRepo {
     }
 
     async getIssuesByUserId(userId: number): Promise<Issue[]> {
-        try {
-            return await this.prismaClient.issue.findMany({
-                where: {
-                    userId
-                },
-                include: {
-                    group: true
-                }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+        return await this.prismaClient.issue.findMany({
+            where: {
+                userId
+            },
+            include: {
+                group: true
+            }
+        })
     }
 
     async getCommunityIssues(limit: number, afterId: number): Promise<Issue[] | undefined> {
-        try {
-            return await this.prismaClient.issue.findMany({
-                where: {
-                    id: {
-                        gt: afterId
-                    }
-                },
-                take: limit,
-                include: {
-                    user: true,
-                    group: true
+        return await this.prismaClient.issue.findMany({
+            where: {
+                id: {
+                    gt: afterId
                 }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+            },
+            take: limit,
+            include: {
+                user: true,
+                group: true
+            }
+        })
     }
 
     async getFilteredCommunityIssues(filter: string): Promise<Issue[] | undefined> {
-        try {
-            return await this.prismaClient.issue.findMany({
-                where: {
-                    title: {
-                        contains: filter
-                    }
-                },
-                include: {
-                    user: true,
-                    group: true
+        return await this.prismaClient.issue.findMany({
+            where: {
+                title: {
+                    contains: filter
                 }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+            },
+            include: {
+                user: true,
+                group: true
+            }
+        })
     }
 
     async createIssue(issue: IssueContract): Promise<Issue> {
-        try {
-            return await this.prismaClient.issue.create({
-                data: {
-                    title: issue.title,
-                    description: issue.description,
-                    status: 'OPEN',
-                    language: issue.language,
-                    framework: issue.framework,
-                    user: {
-                        connect: {
-                            id: issue.userId
-                        }
-                    },
-                    group: {
-                        connect: {
-                            id: issue.groupId
-                        }
-                    },
+        return await this.prismaClient.issue.create({
+            data: {
+                title: issue.title,
+                description: issue.description,
+                status: 'OPEN',
+                language: issue.language,
+                framework: issue.framework,
+                user: {
+                    connect: {
+                        id: issue.userId
+                    }
                 },
-                include: {
-                    user: true,
-                    group: true
-                }
-            })
-        } finally {
-            await this.prismaClient.$disconnect()
-        }
+                group: {
+                    connect: {
+                        id: issue.groupId
+                    }
+                },
+            },
+            include: {
+                user: true,
+                group: true
+            }
+        })
     }
 }

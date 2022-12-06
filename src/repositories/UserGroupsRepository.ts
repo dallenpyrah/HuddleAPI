@@ -12,53 +12,41 @@ export default class UserGroupsRepository implements IUserGroupRepo {
     }
 
     async getUserGroupsByUserId(userId: number): Promise<UserGroups[]> {
-        try {
-            return await this.prisma.userGroups.findMany({
-                where: {
-                    userId
-                },
-                include: {
-                    group: true
-                }
-            })
-        } finally {
-            await this.prisma.$disconnect()
-        }
+        return await this.prisma.userGroups.findMany({
+            where: {
+                userId
+            },
+            include: {
+                group: true
+            }
+        })
     }
 
     async addUserToGroup(groupId: number, userId: number): Promise<UserGroups> {
-        try {
-            return await this.prisma.userGroups.create({
-                data: {
-                    user: {
-                        connect: {
-                            id: userId
-                        }
-                    },
-                    group: {
-                        connect: {
-                            id: groupId
-                        }
+        return await this.prisma.userGroups.create({
+            data: {
+                user: {
+                    connect: {
+                        id: userId
+                    }
+                },
+                group: {
+                    connect: {
+                        id: groupId
                     }
                 }
-            })
-        } finally {
-            await this.prisma.$disconnect()
-        }
+            }
+        })
     }
 
     async getUsersByGroupId(groupId: number): Promise<UserGroups[]> {
-        try {
-            return await this.prisma.userGroups.findMany({
-                where: {
-                    groupId
-                },
-                include: {
-                    user: true
-                }
-            })
-        } finally {
-            await this.prisma.$disconnect()
-        }
+        return await this.prisma.userGroups.findMany({
+            where: {
+                groupId
+            },
+            include: {
+                user: true
+            }
+        })
     }
 }
