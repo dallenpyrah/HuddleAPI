@@ -28,13 +28,9 @@ To run the test suite, use the following command:
 npm run test
 ```
 
-
 ## Contributing
 
-We welcome contributions to the project! Before you begin, please read the following:
-
-- [Contributor License Agreement](https://docs.google.com/forms/d/e/1FAIpQLSfQrQcZsKsMnGx0sCzT-wsrkeYp-LKjZR9c1HG0iNdfh2QOJw/viewform) - please fill out and submit this form before contributing.
-- [Code of Conduct](CODE_OF_CONDUCT.md) - please review and follow this code of conduct.
+We welcome contributions to the project!
 
 To contribute, follow these steps:
 
@@ -45,7 +41,3 @@ To contribute, follow these steps:
 5. Open a pull request from your branch to the `develop` branch of the main repository.
 
 We will review your pull request and provide feedback as soon as possible. Thank you for contributing!
-
-## License
-
-This project is licensed under the [MIT License](LICENSE).
