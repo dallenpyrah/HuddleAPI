@@ -38,6 +38,21 @@ To contribute, follow these steps:
 2. Create a new branch for your changes.
 3. Make your changes and commit them to your branch.
 4. Push your branch to your forked repository.
-5. Open a pull request from your branch to the `develop` branch of the main repository.
+5. Open a pull request from your branch to the `Release` branch of the main repository.
 
-We will review your pull request and provide feedback as soon as possible. Thank you for contributing!
+Your pull request will be reviewed by a member of the Huddle team, and possibly merged into the Release branch.
+
+## What to Contribute
+
+We welcome contributions of all kinds to Huddle, including:
+
+- Bug fixes and improvements to existing features.
+- New features and enhancements.
+- Documentation updates and improvements.
+- Tests and test infrastructure.
+
+If you are unsure about what to contribute, you can always contact the Huddle team to discuss potential contributions.
+
+## Thank You!
+
+Thank you for considering contributing to Huddle! We appreciate your time and effort, and look forward to working with you.
