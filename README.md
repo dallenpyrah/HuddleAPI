@@ -38,9 +38,9 @@ To contribute, follow these steps:
 2. Create a new branch for your changes.
 3. Make your changes and commit them to your branch.
 4. Push your branch to your forked repository.
-5. Open a pull request from your branch to the `Release` branch of the main repository.
+5. Open a pull request from your branch to the `main` branch of the main repository.
 
-Your pull request will be reviewed by a member of the Huddle team, and possibly merged into the Release branch.
+Your pull request will be reviewed by a member of the Huddle team, and possibly merged into the main branch.
 
 ## What to Contribute
 
