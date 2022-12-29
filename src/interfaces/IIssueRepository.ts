@@ -7,4 +7,6 @@ export default interface IIssueRepository {
     getFilteredCommunityIssues: (filter: string) => Promise<Issue[] | undefined>
 
     createIssue(issue: IssueContract): Promise<Issue>;
+
+    getIssueById(issueId: number): Promise<Issue | null>;
 }

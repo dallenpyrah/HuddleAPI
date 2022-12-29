@@ -14,6 +14,7 @@ export default class IssuesService {
         this.getCommunityIssues = this.getCommunityIssues.bind(this)
         this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
         this.createIssue = this.createIssue.bind(this)
+        this.getIssueById = this.getIssueById.bind(this)
     }
 
     async getIssuesByUserId(userId: number): Promise<Issue[]> {
@@ -46,5 +47,9 @@ export default class IssuesService {
 
     async createIssue(issue: IssueContract): Promise<Issue> {
         return await this.issuesRepository.createIssue(issue)
+    }
+
+    async getIssueById(issueId: number) {
+        return await this.issuesRepository.getIssueById(issueId);
     }
 }

@@ -78,4 +78,16 @@ export default class IssuesRepository implements IIssueRepo {
             }
         })
     }
+
+    async getIssueById(issueId: number): Promise<Issue | null> {
+        return await this.prismaClient.issue.findUnique({
+            where: {
+                id: issueId
+            },
+            include: {
+                user: true,
+                group: true
+            }
+        })
+    }
 }

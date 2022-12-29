@@ -13,6 +13,7 @@ export default class IssuesController {
         this.getCommunityIssues = this.getCommunityIssues.bind(this)
         this.getFilteredCommunityIssues = this.getFilteredCommunityIssues.bind(this)
         this.createIssue = this.createIssue.bind(this)
+        this.getIssueById = this.getIssueById.bind(this)
     }
 
     async getIssuesByUserId(req: Request, res: Response): Promise<void> {
@@ -25,6 +26,18 @@ export default class IssuesController {
             res.status(500).send(error)
         }
     }
+
+    async getIssueById(req: Request, res: Response): Promise<void> {
+        try {
+            const issueId = parseInt(req.params.issueId);
+            const issue = await this.issuesService.getIssueById(issueId);
+            res.status(200).send(issue);
+        } catch (error) {
+            this.logger.error(error);
+            res.status(500).send(error);
+        }
+    }
+
 
     async getCommunityIssues(req: Request, res: Response): Promise<void> {
         try {
